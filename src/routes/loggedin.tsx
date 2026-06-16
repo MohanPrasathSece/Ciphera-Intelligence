@@ -116,7 +116,7 @@ function LoggedInPage() {
                 <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-accent" />
                 Live Feed · Secure connection
               </div>
-              <h1 className="font-display text-[clamp(2.5rem,6vw,5.5rem)] font-bold leading-[0.9] tracking-tight">
+              <h1 className="font-display text-[clamp(2.2rem,5.2vw,4.5rem)] font-bold leading-[1.25] tracking-tight py-2">
                 Terminal Active.<br />
                 Welcome, <span className="gradient-text">{user.name}</span>.
               </h1>
@@ -130,7 +130,7 @@ function LoggedInPage() {
           <section className="space-y-6">
             <div>
               <div className="text-xs uppercase tracking-[0.18em] text-primary">Live Assets</div>
-              <h2 className="mt-2 font-display text-3xl font-bold md:text-4xl">Market Indexing</h2>
+              <h2 className="mt-2 font-display text-2xl md:text-3xl font-bold leading-[1.25] py-1">Market Indexing</h2>
             </div>
             
             <div className="grid gap-6 md:grid-cols-3">
@@ -149,7 +149,7 @@ function LoggedInPage() {
                   <Activity className="h-4 w-4" />
                   Yield projection
                 </div>
-                <h3 className="mt-3 font-display text-3xl font-bold">Compound Growth Simulator</h3>
+                <h3 className="mt-3 font-display text-2xl font-bold leading-[1.25] py-1">Compound Growth Simulator</h3>
                 <p className="mt-2 text-sm text-muted-foreground">
                   Estimate returns across custodial nodes and staking pools. Select investment level to simulate earnings.
                 </p>
@@ -165,7 +165,7 @@ function LoggedInPage() {
                   <Briefcase className="h-4 w-4" />
                   Diversification
                 </div>
-                <h3 className="mt-3 font-display text-3xl font-bold">Asset Allocation</h3>
+                <h3 className="mt-3 font-display text-2xl font-bold leading-[1.25] py-1">Asset Allocation</h3>
                 <p className="mt-2 text-sm text-muted-foreground">
                   Ciphera-recommended balanced portfolio weightings.
                 </p>
@@ -212,7 +212,7 @@ function LoggedInPage() {
             <div className="mx-auto max-w-3xl">
               <div className="text-center mb-10">
                 <div className="text-xs uppercase tracking-[0.18em] text-accent">VIP Support</div>
-                <h2 className="mt-2 font-display text-3xl font-bold">Request Consultation</h2>
+                <h2 className="mt-2 font-display text-2xl font-bold leading-[1.25] py-1">Request Consultation</h2>
                 <p className="mt-2 text-sm text-muted-foreground">
                   Our private desk partners are available. Submit details for direct secure contact.
                 </p>

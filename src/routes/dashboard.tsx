@@ -122,7 +122,7 @@ function Welcome({ name }: { name: string }) {
           <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-primary" />
           Live · {new Date().toLocaleDateString()}
         </div>
-        <h1 className="font-display text-[clamp(2.5rem,6vw,5rem)] font-bold leading-[0.95] tracking-tight">
+        <h1 className="font-display text-[clamp(2.2rem,5.2vw,4.2rem)] font-bold leading-[1.25] tracking-tight py-2">
           Welcome back,<br />
           <span className="gradient-text">{name}.</span>
         </h1>
@@ -314,7 +314,7 @@ function TradingBots() {
       <div className="mb-8 flex items-end justify-between">
         <div>
           <div className="text-xs uppercase tracking-[0.18em] text-muted-foreground">Autonomous fleet</div>
-          <h2 className="mt-2 font-display text-4xl font-bold tracking-tight md:text-5xl">
+          <h2 className="mt-2 font-display text-2xl font-bold tracking-tight md:text-3xl leading-[1.25] py-1">
             Bots that <span className="gradient-text">never sleep.</span>
           </h2>
         </div>
@@ -423,7 +423,7 @@ function CryptoIntel() {
     <section className="relative z-10 mx-auto max-w-7xl px-6 py-16">
       <div className="mb-8">
         <div className="text-xs uppercase tracking-[0.18em] text-muted-foreground">Intel</div>
-        <h2 className="mt-2 font-display text-4xl font-bold tracking-tight md:text-5xl">
+        <h2 className="mt-2 font-display text-2xl font-bold tracking-tight md:text-3xl leading-[1.25] py-1">
           The market, <span className="gradient-text">decoded.</span>
         </h2>
       </div>
@@ -439,7 +439,7 @@ function CryptoIntel() {
             className="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.02] p-6"
           >
             <div className="font-mono text-xs text-primary">0{i + 1}</div>
-            <h3 className="mt-3 font-display text-xl font-bold">{f.title}</h3>
+            <h3 className="mt-3 font-display text-base font-bold leading-[1.25] py-1">{f.title}</h3>
             <p className="mt-2 text-sm text-muted-foreground">{f.body}</p>
             <div className="mt-6 h-px w-full bg-gradient-to-r from-primary/40 via-accent/40 to-transparent" />
           </motion.article>
@@ -476,7 +476,7 @@ function Activity() {
   return (
     <section className="relative z-10 mx-auto max-w-7xl px-6 py-16">
       <div className="mb-6 flex items-end justify-between">
-        <h2 className="font-display text-3xl font-bold tracking-tight md:text-4xl">Live activity</h2>
+        <h2 className="font-display text-2xl font-bold tracking-tight md:text-3xl leading-[1.25] py-1">Live activity</h2>
         <span className="text-xs text-muted-foreground">Streaming</span>
       </div>
       <div className="overflow-hidden rounded-2xl border border-white/10 bg-white/[0.02]">

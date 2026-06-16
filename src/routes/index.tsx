@@ -282,7 +282,7 @@ function Hero() {
           </div>
           <h1
             ref={headlineRef}
-            className="font-display text-[clamp(3rem,9vw,8.5rem)] font-bold leading-[0.82] tracking-tight text-balance"
+            className="font-display text-[clamp(2.2rem,6.5vw,5.5rem)] font-bold leading-[1.25] tracking-tight text-balance py-3"
           >
             Crypto<br />
             <span className="gradient-text">engineered</span><br />
@@ -488,7 +488,7 @@ function PinnedProduct() {
     <section ref={ref} id="product" className="relative z-10 h-screen overflow-hidden">
       <div className="mx-auto flex h-full max-w-7xl flex-col justify-center px-6">
         <div className="mb-3 text-sm uppercase tracking-[0.3em] text-primary">Product</div>
-        <h2 className="font-display text-[clamp(2.5rem,7vw,6rem)] font-bold leading-[0.95] text-balance">
+        <h2 className="font-display text-[clamp(2.0rem,5.2vw,4.0rem)] font-bold leading-[1.25] text-balance py-3">
           One terminal.<br />Every market.
         </h2>
         <div className="mt-16 grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-4">
@@ -589,7 +589,7 @@ function PinnedEcosystem() {
     <section ref={ref} id="markets" className="relative z-10 h-screen overflow-hidden">
       <div className="mx-auto flex h-full max-w-7xl flex-col justify-center px-6">
         <div className="mb-3 text-sm uppercase tracking-[0.3em] text-accent">Ecosystem</div>
-        <h2 className="font-display text-[clamp(2.5rem,6vw,5.5rem)] font-bold leading-[0.95]">
+        <h2 className="font-display text-[clamp(2.0rem,4.8vw,3.8rem)] font-bold leading-[1.25] py-3">
           A live trading desk in your pocket.
         </h2>
         <div className="relative mt-10 grid grid-cols-1 items-center gap-8 lg:grid-cols-[1.5fr_1fr]">
@@ -743,7 +743,7 @@ function PinnedSecurity() {
       <div className="mx-auto grid h-full max-w-7xl items-center gap-12 px-6 lg:grid-cols-[1fr_1.2fr]">
         <div>
           <div className="mb-3 text-sm uppercase tracking-[0.3em]" style={{ color: "var(--glow-violet)" }}>Security</div>
-          <h2 className="font-display text-[clamp(2.5rem,6vw,5.5rem)] font-bold leading-[0.95]">
+          <h2 className="font-display text-[clamp(2.0rem,4.8vw,3.8rem)] font-bold leading-[1.25] py-3">
             Bank-grade,<br /> by design.
           </h2>
           <p className="mt-6 max-w-md text-lg text-muted-foreground">
@@ -801,7 +801,7 @@ function Testimonials() {
     <section className="relative z-10 overflow-hidden py-40">
       <div className="mx-auto max-w-7xl px-6 text-center">
         <div className="mb-3 text-sm uppercase tracking-[0.3em] text-primary">Trusted</div>
-        <h2 className="font-display text-[clamp(2.5rem,6vw,5rem)] font-bold leading-[0.95] text-balance">
+        <h2 className="font-display text-[clamp(2.0rem,4.8vw,3.6rem)] font-bold leading-[1.25] text-balance py-3">
           The capital behind <span className="gradient-text">the curve</span>.
         </h2>
       </div>
@@ -879,7 +879,7 @@ function FinalCTA() {
       <div className="cta-glow pointer-events-none absolute left-1/2 top-1/2 h-[800px] w-[800px] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-50 blur-[160px]"
         style={{ background: "var(--gradient-primary)" }} />
       <div className="relative mx-auto max-w-6xl px-6 text-center">
-        <h2 className="font-display text-[clamp(3rem,11vw,11rem)] font-bold leading-[0.82] tracking-tight text-balance">
+        <h2 className="font-display text-[clamp(2.2rem,7.0vw,6.5rem)] font-bold leading-[1.25] tracking-tight text-balance py-6">
           Move<br />
           <span className="gradient-text">capital</span><br />
           like light.
@@ -940,7 +940,7 @@ function ContactFormSection() {
       <div className="mx-auto max-w-4xl px-6">
         <div className="text-center mb-16">
           <div className="mb-3 text-sm uppercase tracking-[0.3em] text-primary">Inquiries</div>
-          <h2 className="font-display text-[clamp(2.5rem,6vw,5rem)] font-bold leading-[0.95] tracking-tight">
+          <h2 className="font-display text-[clamp(2.0rem,4.8vw,3.6rem)] font-bold leading-[1.25] tracking-tight py-3">
             Connect with <span className="gradient-text">Ciphera</span>.
           </h2>
           <p className="mt-4 text-muted-foreground">
