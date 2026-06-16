@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { useNavigate } from "@tanstack/react-router";
-import { signUpUser, loginUser } from "../lib/auth-fns";
+import { useNavigate } from "react-router-dom";
+import { signUpUser, loginUser } from "../lib/auth";
 import { toast } from "sonner";
 
 type Mode = "login" | "signup";
@@ -36,14 +36,12 @@ export function AuthModal() {
           setLoading(false);
           return;
         }
-        const res = await signUpUser({
-          data: { name, email, phone, password },
-        });
+        const res = await signUpUser({ name, email, phone, password });
         if (res.success && res.user) {
           localStorage.setItem("ciphera-user", JSON.stringify(res.user));
           toast.success("Account created successfully!");
           setOpen(false);
-          navigate({ to: "/loggedin" });
+          navigate("/loggedin");
         } else {
           toast.error(res.error || "Failed to create account.");
         }
@@ -53,14 +51,12 @@ export function AuthModal() {
           setLoading(false);
           return;
         }
-        const res = await loginUser({
-          data: { email, password },
-        });
+        const res = await loginUser({ email, password });
         if (res.success && res.user) {
           localStorage.setItem("ciphera-user", JSON.stringify(res.user));
           toast.success("Welcome back!");
           setOpen(false);
-          navigate({ to: "/loggedin" });
+          navigate("/loggedin");
         } else {
           toast.error(res.error || "Invalid email or password.");
         }

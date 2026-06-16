@@ -1,10 +1,10 @@
-import { createFileRoute, useNavigate, Link } from "@tanstack/react-router";
+import { useNavigate, Link } from "react-router-dom";
 import { useEffect, useMemo, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { SmoothScroll } from "@/components/SmoothScroll";
 import { ScrollToTop } from "@/components/ScrollToTop";
 import { toast } from "sonner";
-import { submitContactForm } from "../lib/contact-fns";
+import { submitContactForm } from "@/lib/contact";
 import {
   TrendingUp,
   Coins,
@@ -17,32 +17,23 @@ import {
   TrendingDown,
 } from "lucide-react";
 
-export const Route = createFileRoute("/loggedin")({
-  head: () => ({
-    meta: [
-      { title: "Ciphera Intelligence · Investment Terminal" },
-      { name: "description", content: "Your real-time cinematic investment terminal." },
-    ],
-  }),
-  component: LoggedInPage,
-});
 
 type UserSession = { name: string; email: string; phone?: string };
 
-function LoggedInPage() {
+export default function LoggedInPage() {
   const [user, setUser] = useState<UserSession | null>(null);
   const navigate = useNavigate();
 
   useEffect(() => {
     const raw = typeof window !== "undefined" ? localStorage.getItem("ciphera-user") : null;
     if (!raw) {
-      navigate({ to: "/" });
+      navigate("/");
       return;
     }
     try {
       setUser(JSON.parse(raw));
     } catch {
-      navigate({ to: "/" });
+      navigate("/");
     }
   }, [navigate]);
 
@@ -51,7 +42,7 @@ function LoggedInPage() {
   function handleLogout() {
     localStorage.removeItem("ciphera-user");
     toast.success("Successfully logged out.");
-    navigate({ to: "/" });
+    navigate("/");
   }
 
   return (
@@ -427,13 +418,11 @@ function LoggedInContactForm({ defaultUser }: { defaultUser: UserSession }) {
     setSending(true);
     try {
       const res = await submitContactForm({
-        data: {
           name,
           email,
           phone,
           message,
           sourceId: "ciphera_vip_consultation",
-        },
       });
       if (res.success) {
         toast.success("VIP Consultation request queued! A private adviser will contact you shortly.");

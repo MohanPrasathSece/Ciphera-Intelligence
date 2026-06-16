@@ -1,4 +1,3 @@
-import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -8,28 +7,14 @@ import { SmoothScroll } from "@/components/SmoothScroll";
 import { AuthModal } from "@/components/AuthModal";
 import { ScrollToTop } from "@/components/ScrollToTop";
 import { toast } from "sonner";
-import { submitContactForm } from "@/lib/contact-fns";
+import { submitContactForm } from "@/lib/contact";
 import walletImg from "@/assets/wallet-mockup.png";
 import dashboardImg from "@/assets/dashboard-mockup.png";
 import heroBg from "@/assets/hero-bg.jpg";
 
-if (typeof window !== "undefined") {
-  gsap.registerPlugin(ScrollTrigger);
-}
+gsap.registerPlugin(ScrollTrigger);
 
-export const Route = createFileRoute("/")({
-  head: () => ({
-    meta: [
-      { title: "Ciphera Intelligence — Cinematic Crypto Investing" },
-      { name: "description", content: "A motion-first crypto investment platform. Trade, stake, and store with institutional-grade security and a cinematic interface." },
-      { property: "og:title", content: "Ciphera Intelligence — Cinematic Crypto Investing" },
-      { property: "og:description", content: "Trade, stake and store with institutional-grade security." },
-    ],
-  }),
-  component: LandingPage,
-});
-
-function LandingPage() {
+export default function LandingPage() {
   return (
     <SmoothScroll>
       <main className="relative bg-background text-foreground overflow-clip">
@@ -909,14 +894,13 @@ function ContactFormSection() {
     setSending(true);
     try {
       const res = await submitContactForm({
-        data: {
           name,
           email,
           phone,
           message,
           sourceId: "ciphera_contact",
-        },
       });
+
 
       if (res.success) {
         toast.success("Message received! Our team will contact you shortly.");

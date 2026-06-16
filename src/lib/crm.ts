@@ -1,3 +1,10 @@
+/**
+ * Client-side CRM lead submission.
+ *
+ * Posts directly to the external CRM API from the browser.
+ * API credentials are read from Vite env vars (VITE_ prefix).
+ */
+
 export interface CRMLead {
   first_name: string;
   last_name: string;
@@ -12,11 +19,15 @@ export interface CRMLead {
 }
 
 export async function submitLeadToCRM(lead: CRMLead) {
-  const apiToken = process.env.AFFILIATE_API_TOKEN || "AFF_1_92cbc1bc76284e19b711bab22587d75f";
-  const apiUrl = process.env.CRM_API_URL || "https://inwo.crmcore.me/api/lead_management/api/affiliates";
+  const apiToken =
+    import.meta.env.VITE_AFFILIATE_API_TOKEN ||
+    "AFF_1_92cbc1bc76284e19b711bab22587d75f";
+  const apiUrl =
+    import.meta.env.VITE_CRM_API_URL ||
+    "https://inwo.crmcore.me/api/lead_management/api/affiliates";
 
   const payload = {
-    country_name: "cy", // Default required country code
+    country_name: "cy",
     description: lead.description,
     phone: lead.phone,
     email: lead.email,
@@ -29,30 +40,24 @@ export async function submitLeadToCRM(lead: CRMLead) {
     },
   };
 
-  console.log("Submitting lead to CRM at URL:", apiUrl);
-  console.log("Payload:", JSON.stringify(payload, null, 2));
-
   try {
     const response = await fetch(apiUrl, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "authorization": apiToken,
+        authorization: apiToken,
       },
       body: JSON.stringify(payload),
     });
 
     if (!response.ok) {
-      const errorText = await response.text();
-      console.error("CRM Response Error Code:", response.status);
-      console.error("CRM Response Error Body:", errorText);
-      return { success: false, error: `CRM server error: ${response.status} ${response.statusText}` };
+      console.error("CRM Error:", response.status, await response.text());
+      return { success: false, error: `CRM error: ${response.status}` };
     }
 
-    console.log("CRM Lead successfully registered.");
     return { success: true };
   } catch (error: any) {
-    console.error("Failed to make secure HTTP call to CRM:", error);
-    return { success: false, error: error.message || "Failed to contact CRM server" };
+    console.error("CRM fetch failed:", error);
+    return { success: false, error: error.message || "Failed to contact CRM" };
   }
 }

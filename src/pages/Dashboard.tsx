@@ -1,38 +1,29 @@
-import { createFileRoute, useNavigate, Link } from "@tanstack/react-router";
+import { useNavigate, Link } from "react-router-dom";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SmoothScroll } from "@/components/SmoothScroll";
 
-if (typeof window !== "undefined") gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(ScrollTrigger);
 
-export const Route = createFileRoute("/dashboard")({
-  head: () => ({
-    meta: [
-      { title: "Ciphera · Trading Desk" },
-      { name: "description", content: "Your live crypto trading desk powered by autonomous bots." },
-    ],
-  }),
-  component: DashboardPage,
-});
 
 type User = { name: string; email: string };
 
-function DashboardPage() {
+export default function DashboardPage() {
   const [user, setUser] = useState<User | null>(null);
   const navigate = useNavigate();
 
   useEffect(() => {
     const raw = typeof window !== "undefined" ? localStorage.getItem("ciphera-user") : null;
     if (!raw) {
-      navigate({ to: "/" });
+      navigate("/");
       return;
     }
     try {
       setUser(JSON.parse(raw));
     } catch {
-      navigate({ to: "/" });
+      navigate("/");
     }
   }, [navigate]);
 
@@ -40,7 +31,7 @@ function DashboardPage() {
 
   function logout() {
     localStorage.removeItem("ciphera-user");
-    navigate({ to: "/" });
+    navigate("/");
   }
 
   return (
