@@ -13,7 +13,6 @@ export interface UserProfile {
   name: string;
   email: string;
   phone: string;
-  password?: string;
 }
 
 const STORAGE_KEY = "ciphera-users-db";
@@ -43,7 +42,6 @@ export async function signUpUser(data: UserProfile) {
     name: data.name,
     email: normalizedEmail,
     phone: data.phone,
-    password: data.password,
   };
 
   users.push(userProfile);
@@ -70,15 +68,15 @@ export async function signUpUser(data: UserProfile) {
   };
 }
 
-export async function loginUser(data: Pick<UserProfile, "email" | "password">) {
+export async function loginUser(data: Pick<UserProfile, "email">) {
   const normalizedEmail = data.email.toLowerCase().trim();
   const users = readUsers();
   const user = users.find(
-    (u) => u.email.toLowerCase() === normalizedEmail && u.password === data.password,
+    (u) => u.email.toLowerCase() === normalizedEmail
   );
 
   if (!user) {
-    return { success: false, error: "Invalid email or password." };
+    return { success: false, error: "User not found. Please sign up." };
   }
 
   return {

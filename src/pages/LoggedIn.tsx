@@ -1,5 +1,9 @@
 import { useNavigate, Link } from "react-router-dom";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState, useRef } from "react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 import { motion, AnimatePresence } from "framer-motion";
 import { SmoothScroll } from "@/components/SmoothScroll";
 import { ScrollToTop } from "@/components/ScrollToTop";
@@ -105,7 +109,7 @@ export default function LoggedInPage() {
             >
               <div className="mb-4 inline-flex items-center gap-2 rounded-full surface-glass px-4 py-1.5 text-xs uppercase tracking-[0.18em] text-muted-foreground">
                 <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-accent" />
-                Live Feed · Secure connection
+                Live Feed - Secure connection
               </div>
               <h1 className="font-display text-[clamp(2.2rem,5.2vw,4.5rem)] font-bold leading-[1.25] tracking-tight py-2">
                 Terminal Active.<br />
@@ -131,79 +135,16 @@ export default function LoggedInPage() {
             </div>
           </section>
 
-          {/* Dynamic Portfolio Insights / Simulator */}
-          <section className="grid gap-8 lg:grid-cols-[1.2fr_0.8fr]">
-            {/* Projected yields */}
-            <div className="surface-glass rounded-3xl p-8 shadow-2xl border border-white/10 flex flex-col justify-between">
-              <div>
-                <div className="flex items-center gap-2 text-xs uppercase tracking-[0.18em] text-accent">
-                  <Activity className="h-4 w-4" />
-                  Yield projection
-                </div>
-                <h3 className="mt-3 font-display text-2xl font-bold leading-[1.25] py-1">Compound Growth Simulator</h3>
-                <p className="mt-2 text-sm text-muted-foreground">
-                  Estimate returns across custodial nodes and staking pools. Select investment level to simulate earnings.
-                </p>
-                
-                <GrowthSimulator />
-              </div>
-            </div>
-
-            {/* Portfolio breakdown */}
-            <div className="surface-glass rounded-3xl p-8 shadow-2xl border border-white/10 flex flex-col justify-between">
-              <div>
-                <div className="flex items-center gap-2 text-xs uppercase tracking-[0.18em] text-primary">
-                  <Briefcase className="h-4 w-4" />
-                  Diversification
-                </div>
-                <h3 className="mt-3 font-display text-2xl font-bold leading-[1.25] py-1">Asset Allocation</h3>
-                <p className="mt-2 text-sm text-muted-foreground">
-                  Ciphera-recommended balanced portfolio weightings.
-                </p>
-
-                <div className="mt-8 space-y-4">
-                  {[
-                    { label: "Bitcoin Custody (Tier 1)", percentage: 55, color: "bg-primary" },
-                    { label: "Ethereum Liquid Staking", percentage: 25, color: "bg-accent" },
-                    { label: "DeFi Yield Pools", percentage: 12, color: "bg-[oklch(0.85_0.18_80)]" },
-                    { label: "Solana Indexing", percentage: 8, color: "bg-[oklch(0.55_0.25_295)]" },
-                  ].map((item, idx) => (
-                    <div key={item.label} className="space-y-1.5">
-                      <div className="flex items-center justify-between text-sm">
-                        <span className="text-muted-foreground">{item.label}</span>
-                        <span className="font-mono font-medium">{item.percentage}%</span>
-                      </div>
-                      <div className="h-2 w-full rounded-full bg-white/5 overflow-hidden">
-                        <motion.div
-                          initial={{ width: 0 }}
-                          whileInView={{ width: `${item.percentage}%` }}
-                          viewport={{ once: true }}
-                          transition={{ duration: 1, delay: idx * 0.1, ease: "easeOut" }}
-                          className={`h-full rounded-full ${item.color}`}
-                        />
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              <div className="mt-8 pt-6 border-t border-white/5 flex items-center gap-3">
-                <div className="h-8 w-8 rounded-full bg-white/5 flex items-center justify-center text-primary">
-                  <Coins className="h-4 w-4" />
-                </div>
-                <span className="text-xs text-muted-foreground">
-                  Allocations optimize automatically based on real-time volatility indices.
-                </span>
-              </div>
-            </div>
-          </section>
+          {/* Automated Trading & Intel */}
+          <TradingBots />
+          <CryptoIntel />
 
           {/* Quick Contact Form */}
           <section id="terminal-contact" className="border-t border-white/5 pt-16">
             <div className="mx-auto max-w-3xl">
               <div className="text-center mb-10">
                 <div className="text-xs uppercase tracking-[0.18em] text-accent">VIP Support</div>
-                <h2 className="mt-2 font-display text-2xl font-bold leading-[1.25] py-1">Request Consultation</h2>
+                <h2 className="mt-2 font-display text-2xl font-bold leading-[1.25] py-1">Contact Us</h2>
                 <p className="mt-2 text-sm text-muted-foreground">
                   Our private desk partners are available. Submit details for direct secure contact.
                 </p>
@@ -213,7 +154,7 @@ export default function LoggedInPage() {
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                className="surface-glass rounded-2xl p-6 md:p-8 border border-white/10"
+                className="surface-glass bg-white/[0.05] rounded-2xl p-6 md:p-8 shadow-[0_0_40px_rgba(255,255,255,0.05)] border border-white/20"
               >
                 <LoggedInContactForm defaultUser={user} />
               </motion.div>
@@ -320,88 +261,169 @@ function CryptoAssetCard({
   );
 }
 
-/* ---------------- COMPOUND simulator ---------------- */
-function GrowthSimulator() {
-  const [principal, setPrincipal] = useState(25000);
-  const [years, setYears] = useState(5);
-  const [riskProfile, setRiskProfile] = useState<"conservative" | "moderate" | "aggressive">("moderate");
+/* ---------------- TRADING BOTS ---------------- */
+const BOTS = [
+  { name: "Helios", strat: "Momentum scalper", pnl: 4.82, trades: 312, color: "oklch(0.92 0.22 130)" },
+  { name: "Nyx", strat: "Mean reversion", pnl: 2.14, trades: 184, color: "oklch(0.55 0.25 295)" },
+  { name: "Atlas", strat: "Grid - ETH/USDT", pnl: 6.31, trades: 421, color: "oklch(0.75 0.18 200)" },
+  { name: "Orion", strat: "Arbitrage triangle", pnl: 1.93, trades: 89, color: "oklch(0.85 0.18 80)" },
+];
 
-  const apy = {
-    conservative: 6.2,
-    moderate: 11.4,
-    aggressive: 18.9,
-  };
+function TradingBots() {
+  const ref = useRef<HTMLDivElement>(null);
 
-  const finalValue = useMemo(() => {
-    const rate = apy[riskProfile] / 100;
-    return principal * Math.pow(1 + rate, years);
-  }, [principal, years, riskProfile]);
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      gsap.from(".bot-card", {
+        y: 80,
+        opacity: 0,
+        rotateX: -20,
+        stagger: 0.12,
+        duration: 1,
+        ease: "power3.out",
+        scrollTrigger: { trigger: ref.current, start: "top 80%" },
+      });
+    }, ref);
+    return () => ctx.revert();
+  }, []);
 
   return (
-    <div className="mt-8 space-y-6">
-      <div className="grid gap-4 sm:grid-cols-2">
-        <label className="block">
-          <span className="text-xs uppercase tracking-wider text-muted-foreground">Initial Investment ($)</span>
-          <input
-            type="number"
-            min="1000"
-            step="1000"
-            value={principal}
-            onChange={(e) => setPrincipal(Number(e.target.value))}
-            className="w-full mt-1.5 rounded-lg border border-white/10 bg-white/[0.03] px-3.5 py-2 text-sm text-foreground outline-none focus:border-accent"
-          />
-        </label>
-
-        <label className="block">
-          <span className="text-xs uppercase tracking-wider text-muted-foreground">Duration (Years)</span>
-          <select
-            value={years}
-            onChange={(e) => setYears(Number(e.target.value))}
-            className="w-full mt-1.5 rounded-lg border border-white/10 bg-white/[0.03] px-3.5 py-2 text-sm text-foreground outline-none focus:border-accent"
-          >
-            {[1, 3, 5, 10].map((y) => (
-              <option key={y} value={y} className="bg-background">
-                {y} {y === 1 ? "Year" : "Years"}
-              </option>
-            ))}
-          </select>
-        </label>
-      </div>
-
-      <div>
-        <span className="text-xs uppercase tracking-wider text-muted-foreground">Risk Profile / Allocations</span>
-        <div className="mt-1.5 grid grid-cols-3 gap-2">
-          {(["conservative", "moderate", "aggressive"] as const).map((profile) => (
-            <button
-              key={profile}
-              onClick={() => setRiskProfile(profile)}
-              className={`rounded-lg px-3 py-2 text-xs font-medium border capitalize transition ${
-                riskProfile === profile
-                  ? "bg-accent text-accent-foreground border-accent shadow-[0_0_20px_oklch(0.75_0.18_200/0.3)]"
-                  : "border-white/10 hover:border-white/30 text-muted-foreground"
-              }`}
-            >
-              {profile} ({apy[profile]}%)
-            </button>
-          ))}
-        </div>
-      </div>
-
-      <div className="rounded-2xl bg-white/[0.02] border border-white/5 p-4 flex items-center justify-between">
+    <section ref={ref} className="relative z-10 mx-auto max-w-7xl px-6 py-16">
+      <div className="mb-8 flex items-end justify-between">
         <div>
-          <span className="text-[10px] uppercase tracking-wider text-muted-foreground">Projected Valuation</span>
-          <div className="font-mono text-2xl font-bold text-accent">
-            ${finalValue.toLocaleString(undefined, { maximumFractionDigits: 0 })}
-          </div>
+          <div className="text-xs uppercase tracking-[0.18em] text-muted-foreground">Autonomous fleet</div>
+          <h2 className="mt-2 font-display text-2xl font-bold tracking-tight md:text-3xl leading-[1.25] py-1">
+            Bots that <span className="gradient-text">never sleep.</span>
+          </h2>
         </div>
-        <div className="text-right">
-          <span className="text-[10px] uppercase tracking-wider text-muted-foreground">Net Earnings</span>
-          <div className="font-mono text-sm font-semibold text-primary">
-            +${(finalValue - principal).toLocaleString(undefined, { maximumFractionDigits: 0 })}
-          </div>
+        <div className="hidden text-right text-sm text-muted-foreground md:block">
+          14 active | 0 errors
         </div>
       </div>
-    </div>
+
+      <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4" style={{ perspective: 1200 }}>
+        {BOTS.map((b) => (
+          <BotCard key={b.name} bot={b} />
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function BotCard({ bot }: { bot: (typeof BOTS)[number] }) {
+  const [ticks, setTicks] = useState<number[]>(() =>
+    Array.from({ length: 20 }, () => 20 + Math.random() * 40),
+  );
+  const [running, setRunning] = useState(true);
+
+  useEffect(() => {
+    if (!running) return;
+    const id = setInterval(() => {
+      setTicks((t) => [...t.slice(1), 20 + Math.random() * 40]);
+    }, 600);
+    return () => clearInterval(id);
+  }, [running]);
+
+  return (
+    <motion.div
+      whileHover={{ y: -8, rotateX: 6, rotateY: -4 }}
+      transition={{ type: "spring", stiffness: 200, damping: 18 }}
+      className="bot-card group relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.02] p-5"
+      style={{ transformStyle: "preserve-3d" }}
+    >
+      <div
+        className="pointer-events-none absolute -top-16 -right-16 h-40 w-40 rounded-full opacity-0 blur-3xl transition-opacity group-hover:opacity-40"
+        style={{ background: bot.color }}
+      />
+
+      <div className="flex items-start justify-between">
+        <div>
+          <div className="flex items-center gap-2">
+            <motion.span
+              animate={{ scale: running ? [1, 1.5, 1] : 1, opacity: running ? [1, 0.4, 1] : 0.3 }}
+              transition={{ repeat: Infinity, duration: 1.4 }}
+              className="h-2 w-2 rounded-full"
+              style={{ background: bot.color, boxShadow: `0 0 12px ${bot.color}` }}
+            />
+            <span className="font-display text-lg font-bold">{bot.name}</span>
+          </div>
+          <div className="mt-1 text-xs text-muted-foreground">{bot.strat}</div>
+        </div>
+        <button
+          onClick={() => setRunning((r) => !r)}
+          className="rounded-full border border-white/10 px-2 py-0.5 text-[10px] uppercase tracking-wider text-muted-foreground hover:text-foreground"
+        >
+          {running ? "Pause" : "Run"}
+        </button>
+      </div>
+
+      <div className="mt-4 flex h-16 items-end gap-[3px]">
+        {ticks.map((t, i) => (
+          <motion.div
+            key={i}
+            layout
+            animate={{ height: `${t}%` }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
+            className="flex-1 rounded-sm"
+            style={{
+              background: `linear-gradient(to top, ${bot.color}, transparent)`,
+              opacity: 0.4 + (i / ticks.length) * 0.6,
+            }}
+          />
+        ))}
+      </div>
+
+      <div className="mt-4 flex items-center justify-between text-sm">
+        <span className="font-mono text-primary">+{bot.pnl.toFixed(2)}%</span>
+        <span className="text-xs text-muted-foreground">{bot.trades} trades</span>
+      </div>
+    </motion.div>
+  );
+}
+
+/* ---------------- CRYPTO INTEL ---------------- */
+function CryptoIntel() {
+  const facts = [
+    {
+      title: "DeFi TVL crossed $180B",
+      body: "Decentralized finance protocols custody more value than most national banks. Liquidity is now programmable.",
+    },
+    {
+      title: "Bots execute 73% of volume",
+      body: "Algorithmic strategies dominate modern crypto markets. Speed is no longer optional - it's the entire game.",
+    },
+    {
+      title: "Bitcoin halving - 2028 cycle",
+      body: "Supply issuance halves every ~4 years. The next epoch tightens float and historically precedes new highs.",
+    },
+  ];
+  return (
+    <section className="relative z-10 mx-auto max-w-7xl px-6 py-16">
+      <div className="mb-8">
+        <div className="text-xs uppercase tracking-[0.18em] text-muted-foreground">Intel</div>
+        <h2 className="mt-2 font-display text-2xl font-bold tracking-tight md:text-3xl leading-[1.25] py-1">
+          The market, <span className="gradient-text">decoded.</span>
+        </h2>
+      </div>
+      <div className="grid gap-5 md:grid-cols-3">
+        {facts.map((f, i) => (
+          <motion.article
+            key={f.title}
+            initial={{ opacity: 0, y: 60 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: i * 0.12, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+            whileHover={{ y: -6 }}
+            className="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.02] p-6"
+          >
+            <div className="font-mono text-xs text-primary">0{i + 1}</div>
+            <h3 className="mt-3 font-display text-base font-bold leading-[1.25] py-1">{f.title}</h3>
+            <p className="mt-2 text-sm text-muted-foreground">{f.body}</p>
+            <div className="mt-6 h-px w-full bg-gradient-to-r from-primary/40 via-accent/40 to-transparent" />
+          </motion.article>
+        ))}
+      </div>
+    </section>
   );
 }
 
@@ -451,7 +473,7 @@ function LoggedInContactForm({ defaultUser }: { defaultUser: UserSession }) {
             value={name}
             onChange={(e) => setName(e.target.value)}
             placeholder="Satoshi"
-            className="w-full rounded-xl border border-white/10 bg-white/[0.03] px-4 py-2.5 text-sm text-foreground outline-none transition focus:border-accent"
+            className="w-full rounded-xl border border-white/20 bg-white/[0.08] px-4 py-2.5 text-sm text-foreground outline-none transition focus:border-accent focus:bg-white/[0.12]"
           />
         </label>
         
@@ -465,7 +487,7 @@ function LoggedInContactForm({ defaultUser }: { defaultUser: UserSession }) {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="you@ciphera.io"
-            className="w-full rounded-xl border border-white/10 bg-white/[0.03] px-4 py-2.5 text-sm text-foreground outline-none transition focus:border-accent"
+            className="w-full rounded-xl border border-white/20 bg-white/[0.08] px-4 py-2.5 text-sm text-foreground outline-none transition focus:border-accent focus:bg-white/[0.12]"
           />
         </label>
       </div>
@@ -480,7 +502,7 @@ function LoggedInContactForm({ defaultUser }: { defaultUser: UserSession }) {
           value={phone}
           onChange={(e) => setPhone(e.target.value)}
           placeholder="+1 (555) 123-4567"
-          className="w-full rounded-xl border border-white/10 bg-white/[0.03] px-4 py-2.5 text-sm text-foreground outline-none transition focus:border-accent"
+          className="w-full rounded-xl border border-white/20 bg-white/[0.08] px-4 py-2.5 text-sm text-foreground outline-none transition focus:border-accent focus:bg-white/[0.12]"
         />
       </label>
 
@@ -493,7 +515,7 @@ function LoggedInContactForm({ defaultUser }: { defaultUser: UserSession }) {
           onChange={(e) => setMessage(e.target.value)}
           placeholder="Mention target liquidity ranges, lock-in requirements or node questions..."
           rows={3}
-          className="w-full rounded-xl border border-white/10 bg-white/[0.03] px-4 py-2.5 text-sm text-foreground outline-none transition focus:border-accent resize-none"
+          className="w-full rounded-xl border border-white/20 bg-white/[0.08] px-4 py-2.5 text-sm text-foreground outline-none transition focus:border-accent focus:bg-white/[0.12] resize-none"
         />
       </label>
 
@@ -513,7 +535,7 @@ function LoggedInContactForm({ defaultUser }: { defaultUser: UserSession }) {
             />
           ) : (
             <>
-              Request Private Review
+              Submit
               <span>→</span>
             </>
           )}

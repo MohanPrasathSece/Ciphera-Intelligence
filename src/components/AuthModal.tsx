@@ -12,7 +12,6 @@ export function AuthModal() {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
-  const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
@@ -31,12 +30,12 @@ export function AuthModal() {
     setLoading(true);
     try {
       if (mode === "signup") {
-        if (!name || !email || !phone || !password) {
+        if (!name || !email || !phone) {
           toast.error("Please fill in all fields.");
           setLoading(false);
           return;
         }
-        const res = await signUpUser({ name, email, phone, password });
+        const res = await signUpUser({ name, email, phone });
         if (res.success && res.user) {
           localStorage.setItem("ciphera-user", JSON.stringify(res.user));
           toast.success("Account created successfully!");
@@ -46,19 +45,19 @@ export function AuthModal() {
           toast.error(res.error || "Failed to create account.");
         }
       } else {
-        if (!email || !password) {
-          toast.error("Please fill in all fields.");
+        if (!email) {
+          toast.error("Please enter an email address.");
           setLoading(false);
           return;
         }
-        const res = await loginUser({ email, password });
+        const res = await loginUser({ email });
         if (res.success && res.user) {
           localStorage.setItem("ciphera-user", JSON.stringify(res.user));
           toast.success("Welcome back!");
           setOpen(false);
           navigate("/loggedin");
         } else {
-          toast.error(res.error || "Invalid email or password.");
+          toast.error(res.error || "User not found. Please sign up.");
         }
       }
     } catch (err: any) {
@@ -189,14 +188,7 @@ export function AuthModal() {
                   placeholder="you@ciphera.io"
                   required
                 />
-                <Field
-                  label="Password"
-                  type="password"
-                  value={password}
-                  onChange={setPassword}
-                  placeholder="••••••••"
-                  required
-                />
+
 
                 <motion.button
                   type="submit"

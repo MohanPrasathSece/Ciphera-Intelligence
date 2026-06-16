@@ -263,7 +263,7 @@ function Hero() {
         <div>
           <div ref={eyebrowRef} className="mb-6 inline-flex items-center gap-2 rounded-full surface-glass px-4 py-1.5 text-xs uppercase tracking-[0.18em] text-muted-foreground">
             <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-primary" />
-            Now live · Series C
+            Now live | Series C
           </div>
           <h1
             ref={headlineRef}
@@ -295,14 +295,14 @@ function Hero() {
             {/* Orbiting micro cards */}
             <FloatingChip className="absolute -left-10 top-10" delay={0}>
               <span className="font-mono text-xs text-primary">+18.42%</span>
-              <span className="text-xs text-muted-foreground">BTC · 24h</span>
+              <span className="text-xs text-muted-foreground">BTC / 24h</span>
             </FloatingChip>
             <FloatingChip className="absolute -right-6 top-1/3" delay={0.6}>
               <span className="font-mono text-xs text-accent">$284,917</span>
               <span className="text-xs text-muted-foreground">Portfolio</span>
             </FloatingChip>
             <FloatingChip className="absolute -bottom-2 left-4" delay={1.2}>
-              <span className="font-mono text-xs gradient-text">Staked · 12.8k ETH</span>
+              <span className="font-mono text-xs gradient-text">Staked / 12.8k ETH</span>
             </FloatingChip>
           </div>
         </div>
@@ -592,9 +592,9 @@ function PinnedEcosystem() {
           </div>
           <div className="grid gap-4">
             {[
-              { k: "Spot · Perpetuals", v: "380+ pairs" },
+              { k: "Spot & Perpetuals", v: "380+ pairs" },
               { k: "Average latency", v: "47ms" },
-              { k: "Staking APY", v: "5.8 – 14.2%" },
+              { k: "Staking APY", v: "5.8 - 14.2%" },
               { k: "Active strategies", v: "2,184" },
             ].map((row) => (
               <div key={row.k} className="eco-card surface-glass flex items-center justify-between rounded-2xl px-5 py-4">
@@ -774,12 +774,12 @@ function Testimonials() {
   }, []);
 
   const items = [
-    { name: "Mira Chen", role: "Portfolio Manager · Helix", quote: "The execution layer is the fastest I've benchmarked outside of CME. Genuinely unfair." },
-    { name: "Jonas Reiter", role: "CIO · Northwave Capital", quote: "We migrated $1.4B of custody in 11 days. Onboarding was concierge-level." },
-    { name: "Aiyana Park", role: "Quant Lead · Petra", quote: "First product that respects both speed and aesthetics. Our team noticed within a day." },
+    { name: "Mira Chen", role: "Portfolio Manager, Helix", quote: "The execution layer is the fastest I've benchmarked outside of CME. Genuinely unfair." },
+    { name: "Jonas Reiter", role: "CIO, Northwave Capital", quote: "We migrated $1.4B of custody in 11 days. Onboarding was concierge-level." },
+    { name: "Aiyana Park", role: "Quant Lead, Petra", quote: "First product that respects both speed and aesthetics. Our team noticed within a day." },
     { name: "Theo Albrecht", role: "Family Office", quote: "Compliance was the easiest box to tick I've seen in this industry." },
-    { name: "Lena Volkov", role: "Founder · Drift Labs", quote: "It feels like the only crypto platform built by people who actually trade." },
-    { name: "Marc Devereux", role: "Head of Treasury · Vega", quote: "We replaced four tools with one. Reporting alone paid for the seat in a month." },
+    { name: "Lena Volkov", role: "Founder, Drift Labs", quote: "It feels like the only crypto platform built by people who actually trade." },
+    { name: "Marc Devereux", role: "Head of Treasury, Vega", quote: "We replaced four tools with one. Reporting alone paid for the seat in a month." },
   ];
 
   return (
@@ -928,7 +928,7 @@ function ContactFormSection() {
             Connect with <span className="gradient-text">Ciphera</span>.
           </h2>
           <p className="mt-4 text-muted-foreground">
-            Have questions about institutional-grade custody or high-yield portfolios? Let's talk.
+            Institutional-grade custody or high-yield portfolios? Let's talk.
           </p>
         </div>
 
@@ -937,7 +937,7 @@ function ContactFormSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="surface-glass rounded-3xl p-8 md:p-10 shadow-2xl border border-white/10"
+          className="surface-glass bg-white/[0.05] rounded-3xl p-8 md:p-10 shadow-[0_0_40px_rgba(255,255,255,0.05)] border border-white/20"
         >
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="grid gap-6 md:grid-cols-2">
@@ -951,7 +951,7 @@ function ContactFormSection() {
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   placeholder="Satoshi Nakamoto"
-                  className="w-full rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3 text-base text-foreground outline-none transition focus:border-primary/60 focus:bg-white/[0.06] focus:shadow-[0_0_0_4px_oklch(0.92_0.22_130/0.15)]"
+                  className="w-full rounded-xl border border-white/20 bg-white/[0.08] px-4 py-3 text-base text-foreground outline-none transition focus:border-primary/60 focus:bg-white/[0.12] focus:shadow-[0_0_0_4px_oklch(0.92_0.22_130/0.15)]"
                 />
               </label>
 
@@ -965,7 +965,7 @@ function ContactFormSection() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="satoshi@ciphera.io"
-                  className="w-full rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3 text-base text-foreground outline-none transition focus:border-primary/60 focus:bg-white/[0.06] focus:shadow-[0_0_0_4px_oklch(0.92_0.22_130/0.15)]"
+                  className="w-full rounded-xl border border-white/20 bg-white/[0.08] px-4 py-3 text-base text-foreground outline-none transition focus:border-primary/60 focus:bg-white/[0.12] focus:shadow-[0_0_0_4px_oklch(0.92_0.22_130/0.15)]"
                 />
               </label>
             </div>
@@ -980,7 +980,7 @@ function ContactFormSection() {
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
                 placeholder="+1 (555) 123-4567"
-                className="w-full rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3 text-base text-foreground outline-none transition focus:border-primary/60 focus:bg-white/[0.06] focus:shadow-[0_0_0_4px_oklch(0.92_0.22_130/0.15)]"
+                className="w-full rounded-xl border border-white/20 bg-white/[0.08] px-4 py-3 text-base text-foreground outline-none transition focus:border-primary/60 focus:bg-white/[0.12] focus:shadow-[0_0_0_4px_oklch(0.92_0.22_130/0.15)]"
               />
             </label>
 
@@ -993,7 +993,7 @@ function ContactFormSection() {
                 onChange={(e) => setMessage(e.target.value)}
                 placeholder="Tell us about your investment goals..."
                 rows={4}
-                className="w-full rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3 text-base text-foreground outline-none transition focus:border-primary/60 focus:bg-white/[0.06] focus:shadow-[0_0_0_4px_oklch(0.92_0.22_130/0.15)] resize-none"
+                className="w-full rounded-xl border border-white/20 bg-white/[0.08] px-4 py-3 text-base text-foreground outline-none transition focus:border-primary/60 focus:bg-white/[0.12] focus:shadow-[0_0_0_4px_oklch(0.92_0.22_130/0.15)] resize-none"
               />
             </label>
 
@@ -1013,7 +1013,7 @@ function ContactFormSection() {
                   />
                 ) : (
                   <>
-                    Send Message
+                    Submit
                     <span>→</span>
                   </>
                 )}

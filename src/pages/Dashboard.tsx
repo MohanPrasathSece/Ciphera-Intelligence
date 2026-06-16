@@ -111,7 +111,7 @@ function Welcome({ name }: { name: string }) {
       >
         <div className="mb-4 inline-flex items-center gap-2 rounded-full surface-glass px-4 py-1.5 text-xs uppercase tracking-[0.18em] text-muted-foreground">
           <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-primary" />
-          Live · {new Date().toLocaleDateString()}
+          Live | {new Date().toLocaleDateString()}
         </div>
         <h1 className="font-display text-[clamp(2.2rem,5.2vw,4.2rem)] font-bold leading-[1.25] tracking-tight py-2">
           Welcome back,<br />
@@ -233,7 +233,7 @@ function LiveChart() {
       <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-white/[0.04] to-white/[0.01] p-6 md:p-8">
         <div className="flex flex-wrap items-end justify-between gap-4">
           <div>
-            <div className="text-xs uppercase tracking-[0.18em] text-muted-foreground">BTC / USD · Live</div>
+            <div className="text-xs uppercase tracking-[0.18em] text-muted-foreground">BTC / USD - Live</div>
             <motion.div
               key={Math.floor(price)}
               initial={{ y: -6, opacity: 0 }}
@@ -278,7 +278,7 @@ function LiveChart() {
 const BOTS = [
   { name: "Helios", strat: "Momentum scalper", pnl: 4.82, trades: 312, color: "oklch(0.92 0.22 130)" },
   { name: "Nyx", strat: "Mean reversion", pnl: 2.14, trades: 184, color: "oklch(0.55 0.25 295)" },
-  { name: "Atlas", strat: "Grid · ETH/USDT", pnl: 6.31, trades: 421, color: "oklch(0.75 0.18 200)" },
+  { name: "Atlas", strat: "Grid - ETH/USDT", pnl: 6.31, trades: 421, color: "oklch(0.75 0.18 200)" },
   { name: "Orion", strat: "Arbitrage triangle", pnl: 1.93, trades: 89, color: "oklch(0.85 0.18 80)" },
 ];
 
@@ -310,7 +310,7 @@ function TradingBots() {
           </h2>
         </div>
         <div className="hidden text-right text-sm text-muted-foreground md:block">
-          14 active · 0 errors
+          14 active | 0 errors
         </div>
       </div>
 
@@ -403,10 +403,10 @@ function CryptoIntel() {
     },
     {
       title: "Bots execute 73% of volume",
-      body: "Algorithmic strategies dominate modern crypto markets. Speed is no longer optional — it's the entire game.",
+      body: "Algorithmic strategies dominate modern crypto markets. Speed is no longer optional - it's the entire game.",
     },
     {
-      title: "Bitcoin halving · 2028 cycle",
+      title: "Bitcoin halving - 2028 cycle",
       body: "Supply issuance halves every ~4 years. The next epoch tightens float and historically precedes new highs.",
     },
   ];
@@ -446,7 +446,7 @@ function Activity() {
     { t: "Helios", a: "Bought 0.184 BTC", p: "+$312.40" },
     { t: "Atlas", a: "Sold 4.2 ETH", p: "+$842.10" },
     { t: "Nyx", a: "Rebalanced SOL/USDT", p: "+$104.32" },
-    { t: "Orion", a: "Arbitrage · Kraken→Binance", p: "+$58.91" },
+    { t: "Orion", a: "Arbitrage - Kraken→Binance", p: "+$58.91" },
     { t: "Helios", a: "Bought 0.08 BTC", p: "+$186.00" },
     { t: "Atlas", a: "Grid trigger ETH 3580", p: "+$72.55" },
   ];
@@ -499,7 +499,7 @@ function Activity() {
 function Footer() {
   return (
     <footer className="relative z-10 mx-auto max-w-7xl px-6 py-12 text-center text-xs text-muted-foreground">
-      Ciphera Desk · Demo environment · No real funds at risk.
+      Ciphera Desk | Demo environment | No real funds at risk.
     </footer>
   );
 }
