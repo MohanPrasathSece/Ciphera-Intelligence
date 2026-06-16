@@ -31,38 +31,38 @@ export function AuthModal() {
     try {
       if (mode === "signup") {
         if (!name || !email || !phone) {
-          toast.error("Please fill in all fields.");
+          toast.error("Veuillez remplir tous les champs.");
           setLoading(false);
           return;
         }
         const res = await signUpUser({ name, email, phone });
         if (res.success && res.user) {
           localStorage.setItem("ciphera-user", JSON.stringify(res.user));
-          toast.success("Account created successfully!");
+          toast.success("Compte créé avec succès !");
           setOpen(false);
           navigate("/loggedin");
         } else {
-          toast.error(res.error || "Failed to create account.");
+          toast.error(res.error || "Échec de la création du compte.");
         }
       } else {
         if (!email) {
-          toast.error("Please enter an email address.");
+          toast.error("Veuillez entrer une adresse e-mail.");
           setLoading(false);
           return;
         }
         const res = await loginUser({ email });
         if (res.success && res.user) {
           localStorage.setItem("ciphera-user", JSON.stringify(res.user));
-          toast.success("Welcome back!");
+          toast.success("Bienvenue !");
           setOpen(false);
           navigate("/loggedin");
         } else {
-          toast.error(res.error || "User not found. Please sign up.");
+          toast.error(res.error || "Utilisateur introuvable. Veuillez vous inscrire.");
         }
       }
     } catch (err: any) {
       console.error(err);
-      toast.error(err.message || "An unexpected error occurred.");
+      toast.error(err.message || "Une erreur inattendue s'est produite.");
     } finally {
       setLoading(false);
     }
@@ -113,7 +113,7 @@ export function AuthModal() {
             <div className="relative">
               <div className="mb-1 inline-flex items-center gap-2 rounded-full border border-white/10 px-3 py-1 text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
                 <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-primary" />
-                Ciphera Access
+                Accès Ciphera
               </div>
               <motion.h2
                 key={mode}
@@ -121,12 +121,12 @@ export function AuthModal() {
                 animate={{ opacity: 1, y: 0 }}
                 className="mt-3 font-display text-3xl font-bold tracking-tight"
               >
-                {mode === "login" ? "Welcome back." : "Create your account."}
+                {mode === "login" ? "Bon retour." : "Créez votre compte."}
               </motion.h2>
               <p className="mt-1 text-sm text-muted-foreground">
                 {mode === "login"
-                  ? "Sign in to your cinematic trading desk."
-                  : "30 seconds. No credit card. Pure motion."}
+                  ? "Connectez-vous à votre bureau de trading cinématique."
+                  : "30 secondes. Sans carte de crédit. Pur mouvement."}
               </p>
 
               <div className="mt-6 flex gap-1 rounded-full border border-white/10 p-1 text-sm">
@@ -145,7 +145,7 @@ export function AuthModal() {
                         transition={{ type: "spring", stiffness: 300, damping: 25 }}
                       />
                     )}
-                    <span className="relative">{m === "login" ? "Log in" : "Sign up"}</span>
+                    <span className="relative">{m === "login" ? "Se connecter" : "S'inscrire"}</span>
                   </button>
                 ))}
               </div>
@@ -162,7 +162,7 @@ export function AuthModal() {
                       className="space-y-4 overflow-hidden"
                     >
                       <Field
-                        label="Name"
+                        label="Nom"
                         type="text"
                         value={name}
                         onChange={setName}
@@ -170,7 +170,7 @@ export function AuthModal() {
                         required
                       />
                       <Field
-                        label="Phone Number"
+                        label="Numéro de téléphone"
                         type="tel"
                         value={phone}
                         onChange={setPhone}
@@ -205,7 +205,7 @@ export function AuthModal() {
                     />
                   ) : (
                     <>
-                      {mode === "login" ? "Enter the terminal" : "Create account"}
+                      {mode === "login" ? "Accéder au terminal" : "Créer un compte"}
                       <span>→</span>
                     </>
                   )}
@@ -213,7 +213,7 @@ export function AuthModal() {
               </form>
 
               <p className="mt-5 text-center text-xs text-muted-foreground">
-                Fully functional {mode === "login" ? "login" : "registration"} system
+                Système {mode === "login" ? "de connexion" : "d'inscription"} entièrement fonctionnel
               </p>
             </div>
           </motion.div>

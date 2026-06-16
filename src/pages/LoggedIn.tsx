@@ -45,7 +45,7 @@ export default function LoggedInPage() {
 
   function handleLogout() {
     localStorage.removeItem("ciphera-user");
-    toast.success("Successfully logged out.");
+    toast.success("Déconnexion réussie.");
     navigate("/");
   }
 
@@ -80,7 +80,7 @@ export default function LoggedInPage() {
 
             <div className="flex items-center gap-4">
               <div className="hidden text-right text-xs md:block">
-                <div className="text-muted-foreground">Terminal Active</div>
+                <div className="text-muted-foreground">Terminal Actif</div>
                 <div className="font-medium">{user.name}</div>
               </div>
               <div className="flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-br from-primary to-accent shadow-[0_0_35px_-5px_var(--color-primary)] text-primary-foreground font-bold text-sm uppercase">
@@ -91,7 +91,7 @@ export default function LoggedInPage() {
                 className="flex items-center gap-1.5 rounded-full border border-white/10 px-3.5 py-2 text-xs text-muted-foreground transition hover:border-white/30 hover:text-foreground"
               >
                 <LogOut className="h-3.5 w-3.5" />
-                <span className="hidden sm:inline">Log out</span>
+                <span className="hidden sm:inline">Se déconnecter</span>
               </button>
             </div>
           </div>
@@ -109,14 +109,14 @@ export default function LoggedInPage() {
             >
               <div className="mb-4 inline-flex items-center gap-2 rounded-full surface-glass px-4 py-1.5 text-xs uppercase tracking-[0.18em] text-muted-foreground">
                 <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-accent" />
-                Live Feed - Secure connection
+                Flux en direct - Connexion sécurisée
               </div>
               <h1 className="font-display text-[clamp(2.2rem,5.2vw,4.5rem)] font-bold leading-[1.25] tracking-tight py-2">
-                Terminal Active.<br />
-                Welcome, <span className="gradient-text">{user.name}</span>.
+                Terminal Actif.<br />
+                Bienvenue, <span className="gradient-text">{user.name}</span>.
               </h1>
               <p className="mt-6 max-w-2xl text-lg text-muted-foreground leading-relaxed">
-                You have successfully entered the Ciphera Intelligence private portal. Below is real-time performance analytics of major cryptocurrency indices, and projection tools for custom investments.
+                Vous avez accédé avec succès au portail privé de Ciphera Intelligence. Vous trouverez ci-dessous des analyses de performance en temps réel des principaux indices de crypto-monnaies, et des outils de projection pour les investissements personnalisés.
               </p>
             </motion.div>
           </section>
@@ -124,8 +124,8 @@ export default function LoggedInPage() {
           {/* Crypto stats section */}
           <section className="space-y-6">
             <div>
-              <div className="text-xs uppercase tracking-[0.18em] text-primary">Live Assets</div>
-              <h2 className="mt-2 font-display text-2xl md:text-3xl font-bold leading-[1.25] py-1">Market Indexing</h2>
+              <div className="text-xs uppercase tracking-[0.18em] text-primary">Actifs en direct</div>
+              <h2 className="mt-2 font-display text-2xl md:text-3xl font-bold leading-[1.25] py-1">Indexation des marchés</h2>
             </div>
             
             <div className="grid gap-6 md:grid-cols-3">
@@ -143,10 +143,10 @@ export default function LoggedInPage() {
           <section id="terminal-contact" className="border-t border-white/5 pt-16">
             <div className="mx-auto max-w-3xl">
               <div className="text-center mb-10">
-                <div className="text-xs uppercase tracking-[0.18em] text-accent">VIP Support</div>
-                <h2 className="mt-2 font-display text-2xl font-bold leading-[1.25] py-1">Contact Us</h2>
+                <div className="text-xs uppercase tracking-[0.18em] text-accent">Support VIP</div>
+                <h2 className="mt-2 font-display text-2xl font-bold leading-[1.25] py-1">Nous contacter</h2>
                 <p className="mt-2 text-sm text-muted-foreground">
-                  Our private desk partners are available. Submit details for direct secure contact.
+                  Nos partenaires de bureau privé sont disponibles. Envoyez vos coordonnées pour un contact direct sécurisé.
                 </p>
               </div>
 
@@ -169,11 +169,11 @@ export default function LoggedInPage() {
               <span className="inline-block h-2 w-2 rounded-full bg-primary" />
               Ciphera Terminal
             </div>
-            <div>© {new Date().getFullYear()} Ciphera Intelligence, Inc. SEC & FinCEN compliance active.</div>
+            <div>© {new Date().getFullYear()} Ciphera Intelligence, Inc. Conformité SEC & FinCEN active.</div>
             <div className="flex gap-6">
-              <a href="#" className="transition hover:text-foreground">Security Core</a>
-              <a href="#" className="transition hover:text-foreground">Audit Log</a>
-              <a href="#" className="transition hover:text-foreground">API Docs</a>
+              <a href="#" className="transition hover:text-foreground">Nœud de sécurité</a>
+              <a href="#" className="transition hover:text-foreground">Journal d'audit</a>
+              <a href="#" className="transition hover:text-foreground">Docs API</a>
             </div>
           </div>
         </footer>
@@ -291,13 +291,13 @@ function TradingBots() {
     <section ref={ref} className="relative z-10 mx-auto max-w-7xl px-6 py-16">
       <div className="mb-8 flex items-end justify-between">
         <div>
-          <div className="text-xs uppercase tracking-[0.18em] text-muted-foreground">Autonomous fleet</div>
+          <div className="text-xs uppercase tracking-[0.18em] text-muted-foreground">Flotte autonome</div>
           <h2 className="mt-2 font-display text-2xl font-bold tracking-tight md:text-3xl leading-[1.25] py-1">
-            Bots that <span className="gradient-text">never sleep.</span>
+            Des bots qui <span className="gradient-text">ne dorment jamais.</span>
           </h2>
         </div>
         <div className="hidden text-right text-sm text-muted-foreground md:block">
-          14 active | 0 errors
+          14 actifs | 0 erreurs
         </div>
       </div>
 
@@ -353,7 +353,7 @@ function BotCard({ bot }: { bot: (typeof BOTS)[number] }) {
           onClick={() => setRunning((r) => !r)}
           className="rounded-full border border-white/10 px-2 py-0.5 text-[10px] uppercase tracking-wider text-muted-foreground hover:text-foreground"
         >
-          {running ? "Pause" : "Run"}
+          {running ? "Pause" : "Exécuter"}
         </button>
       </div>
 
@@ -375,7 +375,7 @@ function BotCard({ bot }: { bot: (typeof BOTS)[number] }) {
 
       <div className="mt-4 flex items-center justify-between text-sm">
         <span className="font-mono text-primary">+{bot.pnl.toFixed(2)}%</span>
-        <span className="text-xs text-muted-foreground">{bot.trades} trades</span>
+        <span className="text-xs text-muted-foreground">{bot.trades} transactions</span>
       </div>
     </motion.div>
   );
@@ -385,24 +385,24 @@ function BotCard({ bot }: { bot: (typeof BOTS)[number] }) {
 function CryptoIntel() {
   const facts = [
     {
-      title: "DeFi TVL crossed $180B",
-      body: "Decentralized finance protocols custody more value than most national banks. Liquidity is now programmable.",
+      title: "La TVL DeFi a dépassé 180 Md$",
+      body: "Les protocoles de finance décentralisée gèrent plus de valeur que la plupart des banques nationales. La liquidité est désormais programmable.",
     },
     {
-      title: "Bots execute 73% of volume",
-      body: "Algorithmic strategies dominate modern crypto markets. Speed is no longer optional - it's the entire game.",
+      title: "Les bots exécutent 73% du volume",
+      body: "Les stratégies algorithmiques dominent les marchés crypto modernes. La vitesse n'est plus optionnelle - c'est tout le jeu.",
     },
     {
-      title: "Bitcoin halving - 2028 cycle",
-      body: "Supply issuance halves every ~4 years. The next epoch tightens float and historically precedes new highs.",
+      title: "Halving Bitcoin - cycle 2028",
+      body: "L'émission de l'offre est divisée par deux tous les ~4 ans. La prochaine époque resserre le flottant et précède historiquement de nouveaux sommets.",
     },
   ];
   return (
     <section className="relative z-10 mx-auto max-w-7xl px-6 py-16">
       <div className="mb-8">
-        <div className="text-xs uppercase tracking-[0.18em] text-muted-foreground">Intel</div>
+        <div className="text-xs uppercase tracking-[0.18em] text-muted-foreground">Renseignements</div>
         <h2 className="mt-2 font-display text-2xl font-bold tracking-tight md:text-3xl leading-[1.25] py-1">
-          The market, <span className="gradient-text">decoded.</span>
+          Le marché, <span className="gradient-text">décodé.</span>
         </h2>
       </div>
       <div className="grid gap-5 md:grid-cols-3">
@@ -447,14 +447,14 @@ function LoggedInContactForm({ defaultUser }: { defaultUser: UserSession }) {
           sourceId: "ciphera_vip_consultation",
       });
       if (res.success) {
-        toast.success("VIP Consultation request queued! A private adviser will contact you shortly.");
+        toast.success("Demande de consultation VIP en file d'attente ! Un conseiller privé vous contactera prochainement.");
         setMessage("");
       } else {
-        toast.error(res.error || "Failed to submit request.");
+        toast.error(res.error || "Échec de la soumission de la demande.");
       }
     } catch (err: any) {
       console.error(err);
-      toast.error(err.message || "An error occurred.");
+      toast.error(err.message || "Une erreur s'est produite.");
     } finally {
       setSending(false);
     }
@@ -465,7 +465,7 @@ function LoggedInContactForm({ defaultUser }: { defaultUser: UserSession }) {
       <div className="grid gap-4 md:grid-cols-2">
         <label className="block">
           <span className="mb-1 block text-xs uppercase tracking-wider text-muted-foreground">
-            Name
+            Nom
           </span>
           <input
             type="text"
@@ -479,7 +479,7 @@ function LoggedInContactForm({ defaultUser }: { defaultUser: UserSession }) {
         
         <label className="block">
           <span className="mb-1 block text-xs uppercase tracking-wider text-muted-foreground">
-            Email
+            E-mail
           </span>
           <input
             type="email"
@@ -494,7 +494,7 @@ function LoggedInContactForm({ defaultUser }: { defaultUser: UserSession }) {
 
       <label className="block">
         <span className="mb-1 block text-xs uppercase tracking-wider text-muted-foreground">
-          Phone Number
+          Numéro de téléphone
         </span>
         <input
           type="tel"
@@ -508,12 +508,12 @@ function LoggedInContactForm({ defaultUser }: { defaultUser: UserSession }) {
 
       <label className="block">
         <span className="mb-1 block text-xs uppercase tracking-wider text-muted-foreground">
-          Private Message <span className="text-muted-foreground/40">(Optional)</span>
+          Message privé <span className="text-muted-foreground/40">(Optionnel)</span>
         </span>
         <textarea
           value={message}
           onChange={(e) => setMessage(e.target.value)}
-          placeholder="Mention target liquidity ranges, lock-in requirements or node questions..."
+          placeholder="Mentionnez vos fourchettes de liquidité cibles, les exigences de blocage ou les questions sur les nœuds..."
           rows={3}
           className="w-full rounded-xl border border-white/20 bg-white/[0.08] px-4 py-2.5 text-sm text-foreground outline-none transition focus:border-accent focus:bg-white/[0.12] resize-none"
         />
@@ -535,7 +535,7 @@ function LoggedInContactForm({ defaultUser }: { defaultUser: UserSession }) {
             />
           ) : (
             <>
-              Submit
+              Envoyer
               <span>→</span>
             </>
           )}

@@ -87,13 +87,13 @@ function Nav() {
           Ciphera
         </a>
         <nav className="hidden gap-8 md:flex">
-          {["Product", "Markets", "Security", "Earn", "Contact"].map((n) => (
-            <a key={n} href={`#${n.toLowerCase()}`} className="text-sm text-muted-foreground transition hover:text-foreground">
-              {n}
+          {[["Produit", "product"], ["Marchés", "markets"], ["Sécurité", "security"], ["Rendement", "earn"], ["Contact", "contact"]].map(([label, id]) => (
+            <a key={id} href={`#${id}`} className="text-sm text-muted-foreground transition hover:text-foreground">
+              {label}
             </a>
           ))}
         </nav>
-        <MagneticButton small onClick={openAuth}>Launch app</MagneticButton>
+        <MagneticButton small onClick={openAuth}>Lancer l'app</MagneticButton>
       </div>
     </motion.header>
   );
@@ -263,22 +263,22 @@ function Hero() {
         <div>
           <div ref={eyebrowRef} className="mb-6 inline-flex items-center gap-2 rounded-full surface-glass px-4 py-1.5 text-xs uppercase tracking-[0.18em] text-muted-foreground">
             <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-primary" />
-            Now live | Series C
+            En direct | Série C
           </div>
           <h1
             ref={headlineRef}
             className="font-display text-[clamp(2.2rem,6.5vw,5.5rem)] font-bold leading-[1.25] tracking-tight text-balance py-3"
           >
             Crypto<br />
-            <span className="gradient-text">engineered</span><br />
-            in motion.
+            <span className="gradient-text">conçue</span><br />
+            en mouvement.
           </h1>
           <p ref={subRef} className="mt-8 max-w-xl text-lg leading-relaxed text-muted-foreground text-pretty">
-            Ciphera Intelligence is the cinematic investment platform for serious capital. Real-time markets, institutional custody, and a product that moves with you.
+            Ciphera Intelligence est la plateforme d'investissement cinématique pour les capitaux sérieux. Marchés en temps réel, garde institutionnelle, et un produit qui évolue avec vous.
           </p>
           <div ref={ctaRef} className="mt-10 flex flex-wrap items-center gap-4">
-            <MagneticButton onClick={openAuth}>Start investing</MagneticButton>
-            <MagneticButton variant="ghost" onClick={openAuth}>Watch the film</MagneticButton>
+            <MagneticButton onClick={openAuth}>Commencer à investir</MagneticButton>
+            <MagneticButton variant="ghost" onClick={openAuth}>Voir le film</MagneticButton>
           </div>
         </div>
 
@@ -287,7 +287,7 @@ function Hero() {
             <div className="absolute inset-0 -z-10 blur-3xl" style={{ background: "var(--gradient-radial-glow)" }} />
             <img
               src={walletImg}
-              alt="Ciphera Intelligence crypto wallet"
+              alt="Portefeuille crypto Ciphera Intelligence"
               width={1024}
               height={1024}
               className="w-full drop-shadow-[0_60px_80px_oklch(0_0_0/0.6)]"
@@ -298,11 +298,11 @@ function Hero() {
               <span className="text-xs text-muted-foreground">BTC / 24h</span>
             </FloatingChip>
             <FloatingChip className="absolute -right-6 top-1/3" delay={0.6}>
-              <span className="font-mono text-xs text-accent">$284,917</span>
-              <span className="text-xs text-muted-foreground">Portfolio</span>
+              <span className="font-mono text-xs text-accent">$284 917</span>
+              <span className="text-xs text-muted-foreground">Portefeuille</span>
             </FloatingChip>
             <FloatingChip className="absolute -bottom-2 left-4" delay={1.2}>
-              <span className="font-mono text-xs gradient-text">Staked / 12.8k ETH</span>
+              <span className="font-mono text-xs gradient-text">Staké / 12,8k ETH</span>
             </FloatingChip>
           </div>
         </div>
@@ -378,10 +378,10 @@ function StatsStrip() {
   }, []);
 
   const stats: { label: string; v: number; decimals?: number; prefix?: string; suffix?: string }[] = [
-    { label: "Assets under custody", v: 48.2, decimals: 1, prefix: "$", suffix: "B" },
-    { label: "Active investors", v: 1240000, suffix: "+" },
-    { label: "Markets supported", v: 380 },
-    { label: "Uptime since 2019", v: 99.99, decimals: 2, suffix: "%" },
+    { label: "Actifs sous garde", v: 48.2, decimals: 1, prefix: "$", suffix: "B" },
+    { label: "Investisseurs actifs", v: 1240000, suffix: "+" },
+    { label: "Marchés supportés", v: 380 },
+    { label: "Disponibilité depuis 2019", v: 99.99, decimals: 2, suffix: "%" },
   ];
 
   return (
@@ -463,18 +463,18 @@ function PinnedProduct() {
   }, []);
 
   const features = [
-    { tag: "01", title: "Real-time markets", body: "Sub-50ms execution across 380+ markets with deep institutional liquidity." },
-    { tag: "02", title: "Self-custody vaults", body: "Hardware-isolated keys. You hold the asset, we hold the standard." },
-    { tag: "03", title: "Programmable yield", body: "Compose stake, lend and LP strategies in a single position." },
-    { tag: "04", title: "Insured custody", body: "$500M policy from Lloyd's syndicates on every custodial wallet." },
+    { tag: "01", title: "Marchés en temps réel", body: "Exécution inférieure à 50 ms sur 380+ marchés avec une liquidité institutionnelle profonde." },
+    { tag: "02", title: "Coffres en auto-garde", body: "Clés isolées matériellement. Vous détenez l'actif, nous maintenons la norme." },
+    { tag: "03", title: "Rendement programmable", body: "Composez des stratégies de staking, prêt et LP dans une seule position." },
+    { tag: "04", title: "Garde assurée", body: "Police de 500 M$ des syndicats de Lloyd's sur chaque portefeuille en garde." },
   ];
 
   return (
     <section ref={ref} id="product" className="relative z-10 h-screen overflow-hidden">
       <div className="mx-auto flex h-full max-w-7xl flex-col justify-center px-6">
-        <div className="mb-3 text-sm uppercase tracking-[0.3em] text-primary">Product</div>
+        <div className="mb-3 text-sm uppercase tracking-[0.3em] text-primary">Produit</div>
         <h2 className="font-display text-[clamp(2.0rem,5.2vw,4.0rem)] font-bold leading-[1.25] text-balance py-3">
-          One terminal.<br />Every market.
+          Un terminal.<br />Chaque marché.
         </h2>
         <div className="mt-16 grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-4">
           {features.map((f) => (
@@ -573,16 +573,16 @@ function PinnedEcosystem() {
   return (
     <section ref={ref} id="markets" className="relative z-10 h-screen overflow-hidden">
       <div className="mx-auto flex h-full max-w-7xl flex-col justify-center px-6">
-        <div className="mb-3 text-sm uppercase tracking-[0.3em] text-accent">Ecosystem</div>
+        <div className="mb-3 text-sm uppercase tracking-[0.3em] text-accent">Écosystème</div>
         <h2 className="font-display text-[clamp(2.0rem,4.8vw,3.8rem)] font-bold leading-[1.25] py-3">
-          A live trading desk in your pocket.
+          Un bureau de trading en direct dans votre poche.
         </h2>
         <div className="relative mt-10 grid grid-cols-1 items-center gap-8 lg:grid-cols-[1.5fr_1fr]">
           <div className="dash relative">
             <div className="absolute inset-0 -z-10 blur-3xl" style={{ background: "var(--gradient-radial-glow)" }} />
             <img
               src={dashboardImg}
-              alt="Trading dashboard"
+              alt="Tableau de bord de trading"
               loading="lazy"
               width={1600}
               height={900}
@@ -592,10 +592,10 @@ function PinnedEcosystem() {
           </div>
           <div className="grid gap-4">
             {[
-              { k: "Spot & Perpetuals", v: "380+ pairs" },
-              { k: "Average latency", v: "47ms" },
-              { k: "Staking APY", v: "5.8 - 14.2%" },
-              { k: "Active strategies", v: "2,184" },
+              { k: "Spot & Perpétuels", v: "380+ paires" },
+              { k: "Latence moyenne", v: "47ms" },
+              { k: "APY de staking", v: "5,8 - 14,2%" },
+              { k: "Stratégies actives", v: "2 184" },
             ].map((row) => (
               <div key={row.k} className="eco-card surface-glass flex items-center justify-between rounded-2xl px-5 py-4">
                 <span className="text-sm text-muted-foreground">{row.k}</span>
@@ -619,7 +619,7 @@ function LiveTicker() {
   }, []);
   return (
     <div className="absolute right-4 top-4 surface-glass rounded-xl px-4 py-2 md:right-8 md:top-8">
-      <div className="text-[10px] uppercase tracking-widest text-muted-foreground">Live balance</div>
+      <div className="text-[10px] uppercase tracking-widest text-muted-foreground">Solde en direct</div>
       <motion.div
         key={Math.floor(val)}
         initial={{ opacity: 0, y: 6 }}
@@ -718,21 +718,21 @@ function PinnedSecurity() {
   }, []);
 
   const layers = [
-    { title: "Cold storage", body: "97% of assets in geographically distributed air-gapped vaults.", tag: "Layer 01" },
-    { title: "Multi-party computation", body: "Threshold signatures across 5 independent jurisdictions.", tag: "Layer 02" },
-    { title: "Real-time fraud engine", body: "Behavioural modelling reviews every transaction in <12ms.", tag: "Layer 03" },
+    { title: "Stockage à froid", body: "97 % des actifs dans des coffres isolés géographiquement distribués.", tag: "Couche 01" },
+    { title: "Calcul multipartite", body: "Signatures à seuil dans 5 juridictions indépendantes.", tag: "Couche 02" },
+    { title: "Moteur anti-fraude en temps réel", body: "La modélisation comportementale examine chaque transaction en moins de 12 ms.", tag: "Couche 03" },
   ];
 
   return (
     <section ref={ref} id="security" className="relative z-10 h-screen overflow-hidden">
       <div className="mx-auto grid h-full max-w-7xl items-center gap-12 px-6 lg:grid-cols-[1fr_1.2fr]">
         <div>
-          <div className="mb-3 text-sm uppercase tracking-[0.3em]" style={{ color: "var(--glow-violet)" }}>Security</div>
+          <div className="mb-3 text-sm uppercase tracking-[0.3em]" style={{ color: "var(--glow-violet)" }}>Sécurité</div>
           <h2 className="font-display text-[clamp(2.0rem,4.8vw,3.8rem)] font-bold leading-[1.25] py-3">
-            Bank-grade,<br /> by design.
+            Niveau bancaire,<br /> par conception.
           </h2>
           <p className="mt-6 max-w-md text-lg text-muted-foreground">
-            Three independent layers protect every transaction. Audited quarterly by Trail of Bits, Halborn and Big Four.
+            Trois couches indépendantes protègent chaque transaction. Auditées trimestriellement par Trail of Bits, Halborn et les Big Four.
           </p>
         </div>
         <div className="relative h-[480px] perspective-1000">
@@ -774,20 +774,20 @@ function Testimonials() {
   }, []);
 
   const items = [
-    { name: "Mira Chen", role: "Portfolio Manager, Helix", quote: "The execution layer is the fastest I've benchmarked outside of CME. Genuinely unfair." },
-    { name: "Jonas Reiter", role: "CIO, Northwave Capital", quote: "We migrated $1.4B of custody in 11 days. Onboarding was concierge-level." },
-    { name: "Aiyana Park", role: "Quant Lead, Petra", quote: "First product that respects both speed and aesthetics. Our team noticed within a day." },
-    { name: "Theo Albrecht", role: "Family Office", quote: "Compliance was the easiest box to tick I've seen in this industry." },
-    { name: "Lena Volkov", role: "Founder, Drift Labs", quote: "It feels like the only crypto platform built by people who actually trade." },
-    { name: "Marc Devereux", role: "Head of Treasury, Vega", quote: "We replaced four tools with one. Reporting alone paid for the seat in a month." },
+    { name: "Mira Chen", role: "Gestionnaire de portefeuille, Helix", quote: "La couche d'exécution est la plus rapide que j'aie testée en dehors du CME. Franchement injuste." },
+    { name: "Jonas Reiter", role: "Directeur des investissements, Northwave Capital", quote: "Nous avons migré 1,4 milliard $ de garde en 11 jours. L'intégration était de niveau conciergerie." },
+    { name: "Aiyana Park", role: "Responsable quant, Petra", quote: "Premier produit qui respecte à la fois la vitesse et l'esthétique. Notre équipe l'a remarqué en un jour." },
+    { name: "Theo Albrecht", role: "Family Office", quote: "La conformité était la case la plus facile à cocher que j'aie vue dans ce secteur." },
+    { name: "Lena Volkov", role: "Fondatrice, Drift Labs", quote: "C'est la seule plateforme crypto qui semble avoir été créée par des gens qui tradent vraiment." },
+    { name: "Marc Devereux", role: "Directeur de trésorerie, Vega", quote: "Nous avons remplacé quatre outils par un seul. Le reporting seul a rentabilisé l'abonnement en un mois." },
   ];
 
   return (
     <section className="relative z-10 overflow-hidden py-40">
       <div className="mx-auto max-w-7xl px-6 text-center">
-        <div className="mb-3 text-sm uppercase tracking-[0.3em] text-primary">Trusted</div>
+        <div className="mb-3 text-sm uppercase tracking-[0.3em] text-primary">Confiance</div>
         <h2 className="font-display text-[clamp(2.0rem,4.8vw,3.6rem)] font-bold leading-[1.25] text-balance py-3">
-          The capital behind <span className="gradient-text">the curve</span>.
+          Le capital derrière <span className="gradient-text">la courbe</span>.
         </h2>
       </div>
       <div ref={ref} className="mt-20 space-y-6">
@@ -865,16 +865,16 @@ function FinalCTA() {
         style={{ background: "var(--gradient-primary)" }} />
       <div className="relative mx-auto max-w-6xl px-6 text-center">
         <h2 className="font-display text-[clamp(2.2rem,7.0vw,6.5rem)] font-bold leading-[1.25] tracking-tight text-balance py-6">
-          Move<br />
-          <span className="gradient-text">capital</span><br />
-          like light.
+          Déplacez<br />
+          <span className="gradient-text">le capital</span><br />
+          comme la lumière.
         </h2>
         <p className="cta-sub mx-auto mt-10 max-w-xl text-lg text-white/80">
-          Join 1.2M+ investors trading the next generation of digital assets on Ciphera.
+          Rejoignez 1,2 M+ investisseurs qui tradent la prochaine génération d'actifs numériques sur Ciphera.
         </p>
         <div className="cta-sub mt-12 flex flex-wrap justify-center gap-4">
-          <MagneticButton onClick={openAuth}>Open an account</MagneticButton>
-          <MagneticButton variant="ghost" onClick={openAuth}>Talk to sales</MagneticButton>
+          <MagneticButton onClick={openAuth}>Ouvrir un compte</MagneticButton>
+          <MagneticButton variant="ghost" onClick={openAuth}>Parler aux ventes</MagneticButton>
         </div>
       </div>
     </section>
@@ -903,17 +903,17 @@ function ContactFormSection() {
 
 
       if (res.success) {
-        toast.success("Message received! Our team will contact you shortly.");
+        toast.success("Message reçu ! Notre équipe vous contactera prochainement.");
         setName("");
         setEmail("");
         setPhone("");
         setMessage("");
       } else {
-        toast.error(res.error || "Failed to send message.");
+        toast.error(res.error || "Échec de l'envoi du message.");
       }
     } catch (err: any) {
       console.error(err);
-      toast.error(err.message || "An unexpected error occurred.");
+      toast.error(err.message || "Une erreur inattendue s'est produite.");
     } finally {
       setSending(false);
     }
@@ -923,12 +923,12 @@ function ContactFormSection() {
     <section id="contact" className="relative z-10 py-32 border-t border-white/5">
       <div className="mx-auto max-w-4xl px-6">
         <div className="text-center mb-16">
-          <div className="mb-3 text-sm uppercase tracking-[0.3em] text-primary">Inquiries</div>
+          <div className="mb-3 text-sm uppercase tracking-[0.3em] text-primary">Demandes</div>
           <h2 className="font-display text-[clamp(2.0rem,4.8vw,3.6rem)] font-bold leading-[1.25] tracking-tight py-3">
-            Connect with <span className="gradient-text">Ciphera</span>.
+            Connectez-vous avec <span className="gradient-text">Ciphera</span>.
           </h2>
           <p className="mt-4 text-muted-foreground">
-            Institutional-grade custody or high-yield portfolios? Let's talk.
+            Garde de niveau institutionnel ou portefeuilles à haut rendement ? Parlons-en.
           </p>
         </div>
 
@@ -943,7 +943,7 @@ function ContactFormSection() {
             <div className="grid gap-6 md:grid-cols-2">
               <label className="block">
                 <span className="mb-2 block text-xs uppercase tracking-[0.15em] text-muted-foreground">
-                  Name
+                  Nom
                 </span>
                 <input
                   type="text"
@@ -957,7 +957,7 @@ function ContactFormSection() {
 
               <label className="block">
                 <span className="mb-2 block text-xs uppercase tracking-[0.15em] text-muted-foreground">
-                  Email Address
+                  Adresse e-mail
                 </span>
                 <input
                   type="email"
@@ -972,7 +972,7 @@ function ContactFormSection() {
 
             <label className="block">
               <span className="mb-2 block text-xs uppercase tracking-[0.15em] text-muted-foreground">
-                Phone Number
+                Numéro de téléphone
               </span>
               <input
                 type="tel"
@@ -986,12 +986,12 @@ function ContactFormSection() {
 
             <label className="block">
               <span className="mb-2 block text-xs uppercase tracking-[0.15em] text-muted-foreground">
-                Message <span className="text-muted-foreground/50">(Optional)</span>
+                Message <span className="text-muted-foreground/50">(Optionnel)</span>
               </span>
               <textarea
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
-                placeholder="Tell us about your investment goals..."
+                placeholder="Parlez-nous de vos objectifs d'investissement..."
                 rows={4}
                 className="w-full rounded-xl border border-white/20 bg-white/[0.08] px-4 py-3 text-base text-foreground outline-none transition focus:border-primary/60 focus:bg-white/[0.12] focus:shadow-[0_0_0_4px_oklch(0.92_0.22_130/0.15)] resize-none"
               />
@@ -1013,7 +1013,7 @@ function ContactFormSection() {
                   />
                 ) : (
                   <>
-                    Submit
+                    Envoyer
                     <span>→</span>
                   </>
                 )}
@@ -1035,7 +1035,7 @@ function Footer() {
           <span className="inline-block h-2 w-2 rounded-full bg-primary" />
           Ciphera
         </div>
-        <div>© {new Date().getFullYear()} Ciphera Intelligence, Inc. Regulated entity. Investments at risk.</div>
+        <div>© {new Date().getFullYear()} Ciphera Intelligence, Inc. Entité réglementée. Investissements à risque.</div>
         <div className="flex gap-6">
           <a href="#" className="transition hover:text-foreground">Twitter</a>
           <a href="#" className="transition hover:text-foreground">Github</a>

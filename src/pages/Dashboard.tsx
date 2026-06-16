@@ -77,14 +77,14 @@ function TopBar({ user, onLogout }: { user: User; onLogout: () => void }) {
           Ciphera
         </Link>
         <div className="hidden gap-6 text-sm text-muted-foreground md:flex">
-          <a className="text-foreground">Desk</a>
+          <a className="text-foreground">Bureau</a>
           <a>Bots</a>
-          <a>Markets</a>
+          <a>Marchés</a>
           <a>Staking</a>
         </div>
         <div className="flex items-center gap-3">
           <div className="hidden text-right text-xs md:block">
-            <div className="text-muted-foreground">Signed in</div>
+            <div className="text-muted-foreground">Connecté</div>
             <div className="font-medium">{user.name}</div>
           </div>
           <div className="h-9 w-9 rounded-full bg-gradient-to-br from-primary to-accent shadow-[0_0_30px_-5px_var(--color-primary)]" />
@@ -92,7 +92,7 @@ function TopBar({ user, onLogout }: { user: User; onLogout: () => void }) {
             onClick={onLogout}
             className="rounded-full border border-white/10 px-3 py-1.5 text-xs text-muted-foreground transition hover:border-white/30 hover:text-foreground"
           >
-            Log out
+            Se déconnecter
           </button>
         </div>
       </div>
@@ -114,11 +114,11 @@ function Welcome({ name }: { name: string }) {
           Live | {new Date().toLocaleDateString()}
         </div>
         <h1 className="font-display text-[clamp(2.2rem,5.2vw,4.2rem)] font-bold leading-[1.25] tracking-tight py-2">
-          Welcome back,<br />
+          Bon retour,<br />
           <span className="gradient-text">{name}.</span>
         </h1>
         <p className="mt-5 max-w-xl text-muted-foreground">
-          Your autonomous fleet executed <span className="text-foreground font-medium">1,284 trades</span> while you were away. Markets are open and your bots are dancing.
+          Votre flotte autonome a exécuté <span className="text-foreground font-medium">1 284 transactions</span> pendant votre absence. Les marchés sont ouverts et vos bots sont en action.
         </p>
       </motion.div>
     </section>
@@ -128,10 +128,10 @@ function Welcome({ name }: { name: string }) {
 /* ---------------- PORTFOLIO STATS ---------------- */
 function PortfolioStats() {
   const stats = [
-    { label: "Portfolio value", target: 284917.42, prefix: "$", color: "from-primary to-accent" },
-    { label: "24h P&L", target: 12483.91, prefix: "+$", color: "from-primary to-[oklch(0.7_0.2_140)]" },
-    { label: "Active bots", target: 14, prefix: "", color: "from-accent to-[oklch(0.7_0.2_300)]" },
-    { label: "Win rate", target: 78.4, prefix: "", suffix: "%", color: "from-primary to-accent" },
+    { label: "Valeur du portefeuille", target: 284917.42, prefix: "$", color: "from-primary to-accent" },
+    { label: "P&L 24h", target: 12483.91, prefix: "+$", color: "from-primary to-[oklch(0.7_0.2_140)]" },
+    { label: "Bots actifs", target: 14, prefix: "", color: "from-accent to-[oklch(0.7_0.2_300)]" },
+    { label: "Taux de réussite", target: 78.4, prefix: "", suffix: "%", color: "from-primary to-accent" },
   ];
   return (
     <section className="relative z-10 mx-auto grid max-w-7xl grid-cols-2 gap-4 px-6 py-6 md:grid-cols-4">
@@ -233,7 +233,7 @@ function LiveChart() {
       <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-white/[0.04] to-white/[0.01] p-6 md:p-8">
         <div className="flex flex-wrap items-end justify-between gap-4">
           <div>
-            <div className="text-xs uppercase tracking-[0.18em] text-muted-foreground">BTC / USD - Live</div>
+            <div className="text-xs uppercase tracking-[0.18em] text-muted-foreground">BTC / USD - En direct</div>
             <motion.div
               key={Math.floor(price)}
               initial={{ y: -6, opacity: 0 }}
@@ -244,7 +244,7 @@ function LiveChart() {
             </motion.div>
           </div>
           <div className="flex gap-2 text-xs">
-            {["1H", "1D", "1W", "1M", "ALL"].map((t, i) => (
+            {["1H", "1D", "1W", "1M", "TOUT"].map((t, i) => (
               <button
                 key={t}
                 className={`rounded-full px-3 py-1.5 transition ${
@@ -304,13 +304,13 @@ function TradingBots() {
     <section ref={ref} className="relative z-10 mx-auto max-w-7xl px-6 py-16">
       <div className="mb-8 flex items-end justify-between">
         <div>
-          <div className="text-xs uppercase tracking-[0.18em] text-muted-foreground">Autonomous fleet</div>
+          <div className="text-xs uppercase tracking-[0.18em] text-muted-foreground">Flotte autonome</div>
           <h2 className="mt-2 font-display text-2xl font-bold tracking-tight md:text-3xl leading-[1.25] py-1">
-            Bots that <span className="gradient-text">never sleep.</span>
+            Des bots qui <span className="gradient-text">ne dorment jamais.</span>
           </h2>
         </div>
         <div className="hidden text-right text-sm text-muted-foreground md:block">
-          14 active | 0 errors
+          14 actifs | 0 erreurs
         </div>
       </div>
 
@@ -366,7 +366,7 @@ function BotCard({ bot }: { bot: (typeof BOTS)[number] }) {
           onClick={() => setRunning((r) => !r)}
           className="rounded-full border border-white/10 px-2 py-0.5 text-[10px] uppercase tracking-wider text-muted-foreground hover:text-foreground"
         >
-          {running ? "Pause" : "Run"}
+          {running ? "Pause" : "Exécuter"}
         </button>
       </div>
 
@@ -388,7 +388,7 @@ function BotCard({ bot }: { bot: (typeof BOTS)[number] }) {
 
       <div className="mt-4 flex items-center justify-between text-sm">
         <span className="font-mono text-primary">+{bot.pnl.toFixed(2)}%</span>
-        <span className="text-xs text-muted-foreground">{bot.trades} trades</span>
+        <span className="text-xs text-muted-foreground">{bot.trades} transactions</span>
       </div>
     </motion.div>
   );
@@ -398,24 +398,24 @@ function BotCard({ bot }: { bot: (typeof BOTS)[number] }) {
 function CryptoIntel() {
   const facts = [
     {
-      title: "DeFi TVL crossed $180B",
-      body: "Decentralized finance protocols custody more value than most national banks. Liquidity is now programmable.",
+      title: "La TVL DeFi a dépassé 180 Md$",
+      body: "Les protocoles de finance décentralisée gèrent plus de valeur que la plupart des banques nationales. La liquidité est désormais programmable.",
     },
     {
-      title: "Bots execute 73% of volume",
-      body: "Algorithmic strategies dominate modern crypto markets. Speed is no longer optional - it's the entire game.",
+      title: "Les bots exécutent 73% du volume",
+      body: "Les stratégies algorithmiques dominent les marchés crypto modernes. La vitesse n'est plus optionnelle - c'est tout le jeu.",
     },
     {
-      title: "Bitcoin halving - 2028 cycle",
-      body: "Supply issuance halves every ~4 years. The next epoch tightens float and historically precedes new highs.",
+      title: "Halving Bitcoin - cycle 2028",
+      body: "L'émission de l'offre est divisée par deux tous les ~4 ans. La prochaine époque resserre le flottant et précède historiquement de nouveaux sommets.",
     },
   ];
   return (
     <section className="relative z-10 mx-auto max-w-7xl px-6 py-16">
       <div className="mb-8">
-        <div className="text-xs uppercase tracking-[0.18em] text-muted-foreground">Intel</div>
+        <div className="text-xs uppercase tracking-[0.18em] text-muted-foreground">Renseignements</div>
         <h2 className="mt-2 font-display text-2xl font-bold tracking-tight md:text-3xl leading-[1.25] py-1">
-          The market, <span className="gradient-text">decoded.</span>
+          Le marché, <span className="gradient-text">décodé.</span>
         </h2>
       </div>
       <div className="grid gap-5 md:grid-cols-3">
@@ -443,12 +443,12 @@ function CryptoIntel() {
 /* ---------------- ACTIVITY ---------------- */
 function Activity() {
   const seed = [
-    { t: "Helios", a: "Bought 0.184 BTC", p: "+$312.40" },
-    { t: "Atlas", a: "Sold 4.2 ETH", p: "+$842.10" },
-    { t: "Nyx", a: "Rebalanced SOL/USDT", p: "+$104.32" },
+    { t: "Helios", a: "Acheté 0,184 BTC", p: "+$312.40" },
+    { t: "Atlas", a: "Vendu 4,2 ETH", p: "+$842.10" },
+    { t: "Nyx", a: "Rééquilibré SOL/USDT", p: "+$104.32" },
     { t: "Orion", a: "Arbitrage - Kraken→Binance", p: "+$58.91" },
-    { t: "Helios", a: "Bought 0.08 BTC", p: "+$186.00" },
-    { t: "Atlas", a: "Grid trigger ETH 3580", p: "+$72.55" },
+    { t: "Helios", a: "Acheté 0,08 BTC", p: "+$186.00" },
+    { t: "Atlas", a: "Déclencheur de grille ETH 3580", p: "+$72.55" },
   ];
   const [items, setItems] = useState(seed);
 
@@ -467,8 +467,8 @@ function Activity() {
   return (
     <section className="relative z-10 mx-auto max-w-7xl px-6 py-16">
       <div className="mb-6 flex items-end justify-between">
-        <h2 className="font-display text-2xl font-bold tracking-tight md:text-3xl leading-[1.25] py-1">Live activity</h2>
-        <span className="text-xs text-muted-foreground">Streaming</span>
+        <h2 className="font-display text-2xl font-bold tracking-tight md:text-3xl leading-[1.25] py-1">Activité en direct</h2>
+        <span className="text-xs text-muted-foreground">En streaming</span>
       </div>
       <div className="overflow-hidden rounded-2xl border border-white/10 bg-white/[0.02]">
         <AnimatePresence initial={false}>
@@ -499,7 +499,7 @@ function Activity() {
 function Footer() {
   return (
     <footer className="relative z-10 mx-auto max-w-7xl px-6 py-12 text-center text-xs text-muted-foreground">
-      Ciphera Desk | Demo environment | No real funds at risk.
+      Ciphera Bureau | Environnement de démo | Aucun fonds réel en jeu.
     </footer>
   );
 }
