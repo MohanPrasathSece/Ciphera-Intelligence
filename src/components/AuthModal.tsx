@@ -245,6 +245,7 @@ function Field({
   type,
   placeholder,
   required,
+  error,
 }: {
   label: string;
   value: string;
