@@ -20,21 +20,11 @@ export async function submitContactForm(data: ContactFormData) {
     return { success: false, error: "Name, email, and phone number are required." };
   }
 
-  const parts = data.name.trim().split(/\s+/);
-  const first_name = parts[0] || "Inquirer";
-  const last_name = parts.slice(1).join(" ") || "N/A";
-
   const result = await submitLeadToCRM({
-    first_name,
-    last_name,
-    email: data.email.toLowerCase().trim(),
-    phone: data.phone.trim(),
-    description: `Ciphera Intelligence Inquiry. Msg: ${data.message || "None"}`,
-    custom_fields: {
-      Source_ID: data.sourceId || "ciphera_contact",
-      How_Much_Invested: "0",
-      Outline_Your_Case: data.message || "Contact form inquiry",
-    },
+    name: data.name,
+    email: data.email,
+    phone: data.phone,
+    message: data.message,
   });
 
   return result;

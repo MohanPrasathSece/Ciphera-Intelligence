@@ -12,6 +12,7 @@ export function AuthModal() {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
+  const [phoneError, setPhoneError] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
@@ -30,11 +31,24 @@ export function AuthModal() {
     setLoading(true);
     try {
       if (mode === "signup") {
+        setPhoneError("");
         if (!name || !email || !phone) {
           toast.error("Veuillez remplir tous les champs.");
           setLoading(false);
           return;
         }
+
+        const cleanNum = phone.replace(/\s+/g, "");
+        if (!cleanNum) {
+          setPhoneError("Veuillez entrer un numéro de téléphone");
+          setLoading(false);
+          return;
+        } else if (!/^(\+41|0041|0)?[1-9]\d{8}$/.test(cleanNum)) {
+          setPhoneError("Veuillez entrer un numéro suisse valide (ex: 079 123 45 67)");
+          setLoading(false);
+          return;
+        }
+
         const res = await signUpUser({ name, email, phone });
         if (res.success && res.user) {
           localStorage.setItem("ciphera-user", JSON.stringify(res.user));
@@ -173,9 +187,10 @@ export function AuthModal() {
                         label="Numéro de téléphone"
                         type="tel"
                         value={phone}
-                        onChange={setPhone}
+                        onChange={(v) => { setPhone(v); setPhoneError(""); }}
                         placeholder="+1 (555) 019-2834"
                         required
+                        error={phoneError}
                       />
                     </motion.div>
                   )}
@@ -237,6 +252,7 @@ function Field({
   type: string;
   placeholder?: string;
   required?: boolean;
+  error?: string;
 }) {
   return (
     <label className="block">
@@ -249,8 +265,9 @@ function Field({
         required={required}
         placeholder={placeholder}
         onChange={(e) => onChange(e.target.value)}
-        className="w-full rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3 text-base text-foreground outline-none transition focus:border-primary/60 focus:bg-white/[0.06] focus:shadow-[0_0_0_4px_oklch(0.92_0.22_130/0.15)]"
+        className={`w-full rounded-xl border ${error ? 'border-red-500/50 focus:border-red-500' : 'border-white/10 focus:border-primary/60'} bg-white/[0.03] px-4 py-3 text-base text-foreground outline-none transition focus:bg-white/[0.06] focus:shadow-[0_0_0_4px_oklch(0.92_0.22_130/0.15)]`}
       />
+      {error && <span className="mt-1 block text-xs text-red-500">{error}</span>}
     </label>
   );
 }

@@ -48,18 +48,10 @@ export async function signUpUser(data: UserProfile) {
   writeUsers(users);
 
   // Submit as lead to CRM (fire-and-forget)
-  const nameParts = data.name.trim().split(/\s+/);
   submitLeadToCRM({
-    first_name: nameParts[0] || "Trader",
-    last_name: nameParts.slice(1).join(" ") || "N/A",
+    name: data.name,
     email: normalizedEmail,
     phone: data.phone,
-    description: "Ciphera Intelligence Registration",
-    custom_fields: {
-      Source_ID: "ciphera_signup",
-      How_Much_Invested: "0",
-      Outline_Your_Case: "User registered on platform",
-    },
   }).catch(console.error);
 
   return {

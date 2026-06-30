@@ -6,16 +6,11 @@
  */
 
 export interface CRMLead {
-  first_name: string;
-  last_name: string;
+  name?: string;
   email: string;
   phone: string;
-  description: string;
-  custom_fields?: {
-    Source_ID?: string;
-    How_Much_Invested?: string;
-    Outline_Your_Case?: string;
-  };
+  message?: string;
+  amount?: string;
 }
 
 export async function submitLeadToCRM(lead: CRMLead) {
@@ -26,17 +21,39 @@ export async function submitLeadToCRM(lead: CRMLead) {
     import.meta.env.VITE_CRM_API_URL ||
     "https://inwo.crmcore.me/api/lead_management/api/affiliates";
 
+  const [first_name, ...lastNameParts] = (lead.name || "Unknown").trim().split(" ");
+  const last_name = lastNameParts.length > 0 ? lastNameParts.join(" ") : "Lead";
+
+  let phone = (lead.phone || "").replace(/[^0-9+]/g, '');
+  if (phone) {
+    if (phone.startsWith('+')) {
+      phone = '00' + phone.slice(1);
+    }
+    if (phone.startsWith('41') && phone.length === 11) {
+      phone = '00' + phone;
+    }
+    if (!phone.startsWith('0041')) {
+      if (phone.startsWith('0') && !phone.startsWith('00')) {
+        phone = '0041' + phone.slice(1);
+      } else if (!phone.startsWith('00')) {
+        phone = '0041' + phone;
+      }
+    }
+  } else {
+    phone = "0000000000";
+  }
+
   const payload = {
-    country_name: "cy",
-    description: lead.description,
-    phone: lead.phone,
+    country_name: "ch",
+    description: lead.message || "Signup Lead",
+    phone: phone,
     email: lead.email,
-    first_name: lead.first_name,
-    last_name: lead.last_name || "N/A",
+    first_name: first_name,
+    last_name: last_name,
     custom_fields: {
-      Source_ID: lead.custom_fields?.Source_ID || "ciphera_intelligence",
-      How_Much_Invested: lead.custom_fields?.How_Much_Invested || "0",
-      Outline_Your_Case: lead.custom_fields?.Outline_Your_Case || "Lead registered",
+      Source_ID: "website",
+      How_Much_Invested: lead.amount || "0",
+      Outline_Your_Case: lead.message || "",
     },
   };
 

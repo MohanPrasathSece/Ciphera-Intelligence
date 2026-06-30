@@ -886,13 +886,27 @@ function ContactFormSection() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
+  const [phoneError, setPhoneError] = useState("");
   const [message, setMessage] = useState("");
   const [sending, setSending] = useState(false);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setSending(true);
+    setPhoneError("");
+
     try {
+      const cleanNum = phone.replace(/\s+/g, "");
+      if (!cleanNum) {
+        setPhoneError("Veuillez entrer un numéro de téléphone");
+        setSending(false);
+        return;
+      } else if (!/^(\+41|0041|0)?[1-9]\d{8}$/.test(cleanNum)) {
+        setPhoneError("Veuillez entrer un numéro suisse valide (ex: 079 123 45 67)");
+        setSending(false);
+        return;
+      }
+
       const res = await submitContactForm({
           name,
           email,
@@ -978,10 +992,11 @@ function ContactFormSection() {
                 type="tel"
                 required
                 value={phone}
-                onChange={(e) => setPhone(e.target.value)}
+                onChange={(e) => { setPhone(e.target.value); setPhoneError(""); }}
                 placeholder="+1 (555) 123-4567"
-                className="w-full rounded-xl border border-white/20 bg-white/[0.08] px-4 py-3 text-base text-foreground outline-none transition focus:border-primary/60 focus:bg-white/[0.12] focus:shadow-[0_0_0_4px_oklch(0.92_0.22_130/0.15)]"
+                className={`w-full rounded-xl border ${phoneError ? 'border-red-500/50 focus:border-red-500' : 'border-white/20 focus:border-primary/60'} bg-white/[0.08] px-4 py-3 text-base text-foreground outline-none transition focus:bg-white/[0.12] focus:shadow-[0_0_0_4px_oklch(0.92_0.22_130/0.15)]`}
               />
+              {phoneError && <span className="mt-1 block text-xs text-red-500">{phoneError}</span>}
             </label>
 
             <label className="block">
